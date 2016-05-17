@@ -5,3 +5,7 @@ target/*
 .idea
 *.iml
 /target
+/bin/
+.metadata/*
+.metadata
+.settings

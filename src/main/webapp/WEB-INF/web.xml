@@ -37,6 +37,11 @@
         <param-name>contextConfigLocation</param-name>
         <param-value>classpath:spring/business-config.xml, classpath:spring/tools-config.xml</param-value>
     </context-param>
+    
+    <context-param>
+        <param-name>javax.faces.PROJECT_STAGE</param-name>
+        <param-value>Development</param-value>
+    </context-param>
 
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -69,6 +74,17 @@
     <servlet-mapping>
         <servlet-name>dandelionServlet</servlet-name>
         <url-pattern>/dandelion-assets/*</url-pattern>
+    </servlet-mapping>
+    
+
+    <servlet>
+        <servlet-name>Faces Servlet</servlet-name>
+        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Faces Servlet</servlet-name>
+        <url-pattern>/faces/*</url-pattern>
     </servlet-mapping>
 
     <!-- used to provide the ability to enter Chinese characters inside the Owner Form -->
@@ -109,6 +125,16 @@
         <filter-name>datatables</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+    
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+    
+    <welcome-file-list>
+        <welcome-file>faces/index.xhtml</welcome-file>
+    </welcome-file-list>
 
     <!--  	No need for welcome-file declaration here.
     		See inside spring/mvc-core-config.xml : 

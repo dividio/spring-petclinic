@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewOwnerTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewOwnerLabel_address}"/>
+                    <h:outputText value="#{ownerBean.selected.address}" title="#{bundle.ViewOwnerTitle_address}"/>
+                    <h:outputText value="#{bundle.ViewOwnerLabel_city}"/>
+                    <h:outputText value="#{ownerBean.selected.city}" title="#{bundle.ViewOwnerTitle_city}"/>
+                    <h:outputText value="#{bundle.ViewOwnerLabel_telephone}"/>
+                    <h:outputText value="#{ownerBean.selected.telephone}" title="#{bundle.ViewOwnerTitle_telephone}"/>
+                    <h:outputText value="#{bundle.ViewOwnerLabel_firstName}"/>
+                    <h:outputText value="#{ownerBean.selected.firstName}" title="#{bundle.ViewOwnerTitle_firstName}"/>
+                    <h:outputText value="#{bundle.ViewOwnerLabel_lastName}"/>
+                    <h:outputText value="#{ownerBean.selected.lastName}" title="#{bundle.ViewOwnerTitle_lastName}"/>
+                    <h:outputText value="#{bundle.ViewOwnerLabel_id}"/>
+                    <h:outputText value="#{ownerBean.selected.id}" title="#{bundle.ViewOwnerTitle_id}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{ownerBean.destroyAndView}" value="#{bundle.ViewOwnerDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewOwnerEditLink}"/>
+                <br />
+                <h:commandLink action="#{ownerBean.prepareCreate}" value="#{bundle.ViewOwnerCreateLink}" />
+                <br />
+                <h:commandLink action="#{ownerBean.prepareList}" value="#{bundle.ViewOwnerShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewOwnerIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

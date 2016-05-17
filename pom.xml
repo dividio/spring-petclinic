@@ -271,6 +271,32 @@
             <groupId>com.googlecode.json-simple</groupId>
             <artifactId>json-simple</artifactId>
         </dependency>
+        
+        <!-- JSF -->
+        <dependency>	
+			<groupId>com.sun.faces</groupId>	
+			<artifactId>jsf-api</artifactId>	
+			<version>2.2.13</version>	
+			<scope>provided</scope>	
+		</dependency>	
+		 	
+		<dependency>	
+			<groupId>com.sun.faces</groupId>	
+			<artifactId>jsf-impl</artifactId>	
+			<version>2.2.13</version>	
+			<scope>provided</scope>	
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.glassfish</groupId>
+		    <artifactId>javax.faces</artifactId>
+		    <version>2.2.13</version>
+		</dependency>
+		<dependency>
+		    <groupId>javax.servlet</groupId>
+		    <artifactId>jstl</artifactId>
+		    <version>1.2</version>
+		</dependency>
     </dependencies>
 
     <!-- Maven plugin versions are mentioned in order to guarantee the build reproducibility in the long term -->
