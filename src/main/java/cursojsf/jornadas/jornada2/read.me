@@ -1,1 +1,78 @@
 Ejercicios jornada 2
+
+==================================================================================================
+
+Ejercicio 1: Definición de un Bean
+
+1.a- Crear el bean NavegacionBean con scope de request mediante anotaciones, definirle un atributo 
+"titulo" de tipo String y cuyo valor inicial sea "Menú de navegación".
+
+1.b- Crear la vista navegacion.xhtml en webapp/jornada2. En la vista mostrar 
+dentro de una etiqueta H1 el valor del atributo "titulo" de NavegacionBean.
+
+1.c- Abrir en el navegador la url http://localhost:9966/petclinic/faces/jornada2/navegacion.xhtml
+y comprobar que se muestra el título correctamente.
+
+==================================================================================================
+
+Ejercicio 2: Scope Request
+
+2.a- Añadir un atributo de tipo String llamado "destino" en NavegacionBean y un método 
+llamado "navegar" que devuelva un String nulo.
+
+2.b- En navegacion.xhtml añadir un formulario y, dentro de él, un input cuyo valor sea el 
+atributo "destino" de NavegacionBean. Añadir también dentro del formulario un <h:commandLink> cuyo 
+action sea el método "navegar" definido antes y cuyo value sea el texto "Navegar".
+
+2.c- Desplegamos y abrimos la URL de la página. Introducimos un valor en el input y al pulsar en el link
+de Navegar vemos como se mantiene el valor del input pulsando repetidas veces en el link. Esto es
+por que cada vez que pulsamos en el link, hacemos submit del input y al cargarse la página de nuevo se
+muestra el valor de dicho atributo en la petición.
+
+2.d- Ahora ponemos un <h:outputText> junto al input anterior, cuyo value sea también el atributo "destino".
+Ponemos en el input la propiedad rendered="#{empty navegacionBean.destino}" y en el output ponemos la
+propiedad rendered="#{empty navegacionBean.destino}".
+
+2.e- Recargamos la página, escribimos en el input y pulsamos en el link Navegar. Vemos que tras la petición
+se renderiza el outputText en vez del inputText. Pulsamos otra vez el link y vemos que aparece ahora el 
+input vacío. Esto es porque al estar declarado el Bean como de tipo request, no se mantienen los valores 
+de los atributos entre peticiones si no hacemos submit de ellos. Recordar que un output no hace submit del valor.
+
+==================================================================================================
+
+Ejercicio 3: Scope View
+
+3.a- Ahora cambiamos el scope del Bean a tipo View mediante la anotación @ViewScoped.
+
+3.b- Paramos y desplegamos otra vez el servidor para que coja la nueva configuración del Bean y repetimos
+el apartado 2.e. Ahora vemos que el output se mantiene en pantalla aunque no hagamos submit del valor. Esto
+es porque, en el scope View, mientras estemos en la misma página se mantienen los valores de los atributos del Bean.
+
+3.c- Ahora cambiamos el return del método navegar para devolver ahora la cadena "navegacion". Si no estamos 
+en depuración paramos el servidor y arrancamos para que coja los cambios. Repetimos  la operación de 2.e. Ahora 
+vemos que volvemos a perder el valor del atributo. Esto es porque al devolver una regla de navegación, estamos 
+navegando a otra página, aunque en este caso sea la misma, y perdemos los valores del Bean configurado 
+como ViewScoped.
+
+==================================================================================================
+
+Ejercicio 4: Scope Session
+
+4.a- Ahora cambiamos el scope del Bean a tipo Session mediante la anotación @SessionScoped.
+
+4.b- Paramos y desplegamos otra vez el servidor para que coja la nueva configuración del Bean y repetimos
+el apartado 2.e. Ahora vemos que el output se mantiene en pantalla aunque no hagamos submit del valor y 
+tengamos puesta la regla de navegación "navegar". Esto es porque en el scope Session, mientras estemos en 
+la misma sesión del navegador se mantienen los valores de los atributos del Bean.
+
+4.c- Creamos un nuevo método llamado "invalidarYNavegar", que sea igual que el "navegar" pero antes del 
+return del método navegar escribimos lo siguiente:
+
+HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance()
+        .getExternalContext().getRequest();
+request.getSession().invalidate();
+
+4.d- Con esto invalidamos la sesión antes de navegar, por lo que perdemos los valores almacenados en los 
+Bean de sesión. Añadimos un nuevo link en la página que llame al nuevo método. Repetimos el apartado 2.e 
+con los dos link. Si pulsamos en Navegar se mantiene la sesión, si pulsamos en el otro link vemos como 
+perdemos el valor del atributo destino tras invalidarse la sesión HTTP.
