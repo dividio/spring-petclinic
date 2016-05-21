@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<body>
+
+	<h:form id="idForm" ondblclick="alert('doble click formulario')">
+
+		<fieldset>
+			<legend>Campos de entrada</legend>
+			
+			<!-- Ejemplo de campo inputText -->
+			<h:outputLabel value="Campo Entrada 1" for="inputText1"/>
+			<h:inputText id="inputText1" value="#{componentesBean.entradas['inputText1']}"></h:inputText>
+			<br/>
+			
+			<!-- Ejemplo de campo de entrada obligatorio -->
+			<h:outputLabel value="Campo Entrada 2" for="inputText2"/>
+			<h:inputText id="inputText2" required="true" value="#{componentesBean.entradas['inputText2']}"></h:inputText>
+			<br/>
+			
+			<!-- Ejemplo de campo de textArea -->
+			<h:outputLabel value="Campo TextArea" for="inputTextArea"/>
+			<h:inputTextarea id="inputTextArea" value="#{componentesBean.entradas['inputTextArea']}"/>
+			<br/>
+			
+			<!-- Ejemplo de  inputSecret-->
+			<h:outputLabel value="Campo Secret" for="inputSecret"/>
+			<h:inputSecret id="inputSecret" value="#{componentesBean.entradas['inputSecret']}"/>
+			<br/>
+			
+			<!-- Ejemplo de  inputHidden-->
+			<h:inputHidden id="inputHidden" value="#{componentesBean.entradas['inputHidden']}"/>
+			<br/>
+			
+			<!-- Ejemplo de  selectBooleanCheckbox -->
+			<h:selectBooleanCheckbox id="booleanCheckbox" value="#{componentesBean.entradas['selectBooleanCheckbox']}"/>
+			<h:outputLabel value="booleanCheckbox" for="booleanCheckbox"/>
+			<br/>
+			
+			<!-- Ejemplo de  selectManyCheckbox -->
+			<h:outputLabel value="selectManyCheckbox" for="selectManyCheckbox"/>
+			<h:selectManyCheckbox value="#{componentesBean.entradas['selectManyCheckbox']}" id="selectManyCheckbox">
+				<f:selectItem itemLabel="Enero2" itemValue="JAN"/>
+				<f:selectItem itemLabel="Febrero" itemValue="FEB"/>
+				<f:selectItem itemLabel="Marzo" itemValue="MAR"/>
+				<f:selectItem itemLabel="Abril" itemValue="APR"/>
+				<f:selectItem itemLabel="Mayo" itemValue="MAY"/>
+			</h:selectManyCheckbox>
+			<br/>
+			
+			<!-- Ejemplo de  selectManyListbox -->
+			<h:outputLabel value="selectManyListbox" for="selectManyListbox"/>
+			<h:selectManyListbox value="#{componentesBean.entradas['selectManyListBox']}" id="selectManyListbox">
+				<f:selectItem itemLabel="Enero" itemValue="JAN"/>
+				<f:selectItem itemLabel="Febrero" itemValue="FEB"/>
+				<f:selectItem itemLabel="Marzo" itemValue="MAR"/>
+				<f:selectItem itemLabel="Abril" itemValue="APR"/>
+				<f:selectItem itemLabel="Mayo" itemValue="MAY"/>
+			</h:selectManyListbox>
+			<br/>
+			
+			<!-- Ejemplo de  selectManyMenu -->
+			<h:outputLabel value="selectManyMenu" for="selectManyMenu"/>
+			<h:selectManyMenu id="selectManyMenu" value="#{componentesBean.entradas['selectManyMenu']}">
+				<f:selectItem itemLabel="Enero" itemValue="JAN"/>
+				<f:selectItem itemLabel="Febrero" itemValue="FEB"/>
+				<f:selectItem itemLabel="Marzo" itemValue="MAR"/>
+				<f:selectItem itemLabel="Abril" itemValue="APR"/>
+				<f:selectItem itemLabel="Mayo" itemValue="MAY"/>
+			</h:selectManyMenu>
+			<br/>
+			
+			<!-- Ejemplo de  selectOneListbox -->
+			<h:outputLabel value="selectOneListbox" for="selectOneListbox"/>
+			<h:selectOneListbox id="selectOneListbox" value="#{componentesBean.entradas['selectOneListBox']}">
+				<f:selectItem itemLabel="Enero" itemValue="JAN"/>
+				<f:selectItem itemLabel="Febrero" itemValue="FEB"/>
+				<f:selectItem itemLabel="Marzo" itemValue="MAR"/>
+				<f:selectItem itemLabel="Abril" itemValue="APR"/>
+				<f:selectItem itemLabel="Mayo" itemValue="MAY"/>
+			</h:selectOneListbox>
+			<br/>
+			
+			<!-- Ejemplo de  selectOneMenu -->
+			<h:outputLabel value="selectOneMenu" for="selectOneMenu"/>
+			<h:selectOneMenu id="selectOneMenu" value="#{componentesBean.entradas['selectOneMenu']}">
+				<f:selectItem itemLabel="Enero" itemValue="JAN"/>
+				<f:selectItem itemLabel="Febrero" itemValue="FEB"/>
+				<f:selectItem itemLabel="Marzo" itemValue="MAR"/>
+				<f:selectItem itemLabel="Abril" itemValue="APR"/>
+				<f:selectItem itemLabel="Mayo" itemValue="MAY"/>
+			</h:selectOneMenu>
+			<br/>
+			
+<!-- 			Ejemplo de  selectOneRadio -->
+			<h:outputLabel value="selectOneRadio" for="selectOneRadio"/>
+			<h:selectOneRadio id="selectOneRadio" value="#{componentesBean.entradas['selectOneRadio']}">
+				<f:selectItem itemLabel="Enero" itemValue="JAN"/>
+				<f:selectItem itemLabel="Febrero" itemValue="FEB"/>
+				<f:selectItem itemLabel="Marzo" itemValue="MAR"/>
+				<f:selectItem itemLabel="Abril" itemValue="APR"/>
+				<f:selectItem itemLabel="Mayo" itemValue="MAY"/>
+			</h:selectOneRadio>
+			<br/>
+			
+			<!-- Botón que envia los campos de entrada -->
+			<h:commandLink value="Ejecutar" action="#{componentesBean.accion}"></h:commandLink> 
+		</fieldset>
+		
+		
+		<fieldset>
+			<legend>Otros campos</legend>
+			
+			<!-- Campo para mostrar los mensajes de un componenter -->
+			<h:message for="inputText2"></h:message>
+			
+			<!-- Campo para mostrar todos los mensajes de todos los componentes -->
+			<h:messages></h:messages>
+		</fieldset>
+
+	</h:form>
+</body>
+</html>

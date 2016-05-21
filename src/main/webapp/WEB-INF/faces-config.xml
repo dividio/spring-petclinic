@@ -23,6 +23,6 @@
         </locale-config>
     </application>
     <lifecycle>
-	    <phase-listener>cursojsf.jornadas.jornada1.MyPhaseListener</phase-listener>
+<!-- 	    <phase-listener>cursojsf.jornadas.jornada1.MyPhaseListener</phase-listener> -->
 	</lifecycle>
 </faces-config>
