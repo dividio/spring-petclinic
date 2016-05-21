@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html">
+<body>
+
+	<h:form id="idForm" onclick="alert('click formulario')">
+
+		<fieldset>
+			<legend>Salida de texto</legend> 
+
+			<!-- Ejemplo de salida de texto -->
+			<h:outputText value="Texto de salida outputText"/>
+			<br/>
+			
+			<!-- Ejemplo de outputLabel + outputLink -->
+			<h:outputLabel value="Texto de salida outputLabel" for="idComponente"/>
+			<h:outputLink id="idComponente" value="/petclinic/index.xhtml" onclick="funcion();">Enlace Salida Texto</h:outputLink>
+			
+			<!-- Ejemplo de salida de script -->
+			<h:outputScript>
+				var funcion = function () {
+					alert('funcion');
+				}
+			</h:outputScript>
+		</fieldset>
+		
+		<fieldset>
+			<legend>Botones</legend>
+			
+			<!-- Ejemplo commandButton -->
+			<h:commandButton value="CommandButton"></h:commandButton>
+						
+			<!-- Ejemplo commandLink -->
+			<h:commandLink value="CommandLink"></h:commandLink>
+			
+			<!-- Ejemplo button -->
+			<h:button value="Button"></h:button>
+			
+			<!-- Ejemplo -->
+			<h:link value="Link"></h:link>
+		</fieldset>
+		
+		<fieldset>
+			<legend>Campos de entrada</legend>
+		</fieldset>
+		
+		<fieldset>
+			<legend>Campos de iteración</legend>
+			
+			<h:dataTable value="#{componentesBean.tabla}" var="item">
+				<h:column>
+					<h:outputText value="#{item}"/>					
+				</h:column>
+			</h:dataTable>
+		</fieldset>
+		
+		<fieldset>
+			<legend>Otros campos</legend>
+			
+			<!-- Campo para mostrar los mensajes de un componenter -->
+			<h:message for="idComponente"></h:message>
+			
+			<!-- Campo para mostrar todos los mensajes de todos los componentes -->
+			<h:messages></h:messages>
+		</fieldset>
+
+	</h:form>
+</body>
+</html>
