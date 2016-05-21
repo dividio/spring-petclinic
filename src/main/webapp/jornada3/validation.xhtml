@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<body>
+
+	<h:form id="idForm">
+		
+		<fieldset>
+			<legend>Conversiones Por Defecto</legend>
+			
+			<!-- Ejemplo de campo obligatorio -->
+			<h:outputLabel value="Entrada 1" for="inputText1"/>
+			<h:inputText value="#{validationBean.entradas['INPUT1']}" required="true" id="inputText1">
+			</h:inputText>
+			<h:message for="inputText1"/>
+			<br/>
+			
+			<!-- Ejemplo de validación de longitud [10,20] -->
+			<h:outputLabel value="Entrada 2" for="inputText2"/>
+			<h:inputText value="#{validationBean.entradas['INPUT2']}" required="false" id="inputText2">
+				<f:validateLength minimum="10" maximum="20"/>
+			</h:inputText>
+			<h:message for="inputText2"/>
+			<br/>
+			
+			<!-- Ejemplo de validación de valor numérico -->
+			<h:outputLabel value="Entrada 3" for="inputText3"/>
+			<h:inputText value="#{validationBean.entradas['INPUT3']}" required="false" id="inputText3">
+				<f:validateDoubleRange minimum="10" maximum="20"/>
+			</h:inputText>
+			<h:message for="inputText3"/>
+			<br/>
+			
+			<!-- Ejemplo de validación de valor numérico -->
+			<h:outputLabel value="Entrada 4" for="inputText4"/>
+			<h:inputText value="#{validationBean.entradas['INPUT4']}" required="false" id="inputText4">
+				<f:validateLongRange maximum="20" minimum="10"></f:validateLongRange>
+			</h:inputText>
+			<h:message for="inputText4"/>
+			<br/>
+			
+			<!-- Ejemplo de validación del formato de una IP -->
+			<h:outputLabel value="Entrada 5" for="inputText5"/>
+			<h:inputText value="#{validationBean.entradas['INPUT5']}" required="false" id="inputText5">
+				<f:validateRegex pattern="[1-9]{1}"/>
+			</h:inputText>
+			<h:message for="inputText5"/>
+			<br/>
+			
+			
+		</fieldset>
+		
+		<fieldset>
+			<legend>Conversiones Propias</legend>
+			
+			<!-- Ejemplo de validación de correo electrónico -->
+			<h:outputLabel value="Entrada 6" for="inputText6"/>
+			<h:inputText value="#{validationBean.entradas['INPUT6']}" required="false" id="inputText6">
+				<f:validator validatorId="emailValidator"/>
+			</h:inputText>
+			<h:message for="inputText6"/>
+			<br/>
+			
+		</fieldset>
+		
+		<!-- BOtones de acción -->
+		<h:commandButton immediate="true" action="#{validationBean.accion}" value="Acción IMMEDIATE"/>
+		<h:commandButton immediate="false" action="#{validationBean.accion}" value="Acción NO IMMEDIATE"/>
+		
+		
+	</h:form>
+</body>
+</html>

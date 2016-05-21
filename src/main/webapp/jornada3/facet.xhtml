@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<body>
+
+	<h:form id="idForm">
+		
+		<fieldset>
+			<legend>Modificacion del facet de componentes - Tabla</legend>
+			
+			<h:dataTable value="#{componentesBean.tabla}" var="item">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Cabecera"/>
+					</f:facet>
+					<h:outputText value="#{item}"/>
+					<f:facet name="footer">
+						<h:outputText value="Pie"/>
+					</f:facet>					
+				</h:column>
+			</h:dataTable>
+			
+		</fieldset>
+		
+		
+		
+		
+	</h:form>
+</body>
+</html>
