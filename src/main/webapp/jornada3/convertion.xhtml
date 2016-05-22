@@ -9,14 +9,42 @@
 	<h:form id="idForm">
 		
 		<fieldset>
-			<legend>Validaciones Por Defecto</legend>
+			<legend>Conversiones Por Defecto</legend>
+			
+			<!-- Ejemplo de conversion de numero -->
+			<h:outputLabel value="Entrada 1" for="inputText1"/>
+			<h:inputText value="#{convertBean.entradas['INPUT1']}" required="false" id="inputText1">
+				<f:convertNumber/>
+			</h:inputText>
+			<h:message for="inputText1"/>
+			<br/>
+			
+			<!-- Ejemplo de conversion de fecha -->
+			<h:outputLabel value="Entrada 2" for="inputText2"/>
+			<h:inputText value="#{convertBean.entradas['INPUT2']}" required="false" id="inputText2">
+				<f:convertDateTime/>
+			</h:inputText>
+			<h:message for="inputText2"/>
+			<br/>
 			
 		</fieldset>
 		
 		<fieldset>
-			<legend>Validaciones Propias</legend>
+			<legend>Conversiones Propias</legend>
+			
+			<!-- Ejemplo de conversion NIF -->
+			<h:outputLabel value="Entrada 3" for="inputText3"/>
+			<h:inputText value="#{convertBean.entradas['INPUT3']}" required="false" id="inputText3">
+				<f:converter converterId="nifConverter"/>
+			</h:inputText>
+			<h:message for="inputText3"/>
+			<br/>
 			
 		</fieldset>
+		
+		<!-- BOtones de acción -->
+		<h:commandButton immediate="true" action="#{convertBean.accion}" value="Acción IMMEDIATE"/>
+		<h:commandButton immediate="false" action="#{convertBean.accion}" value="Acción NO IMMEDIATE"/>
 		
 		
 	</h:form>
