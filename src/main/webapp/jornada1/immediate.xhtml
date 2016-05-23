@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<body>
+
+	<h:form id="idForm" ondblclick="alert('doble click formulario')">
+
+		<fieldset>
+			<legend>Ejemplo de uso de immediate</legend>
+			
+			<!-- Campo inputText immediate-->
+			<h:outputLabel value="Campo Entrada 1 (IMMEDIATE)" for="inputText1"/>
+			<h:inputText id="inputText1" value="#{immediateBean.entradas['inputText1']}" immediate="true" 
+					valueChangeListener="#{immediateBean.setInput1}" />
+			<h:message for="inputText1"/>
+			<br/>
+			
+			<!-- Campo inputtext no immediate -->
+			<h:outputLabel value="Campo Entrada 2 (NO IMMEDIATE + REQUIRED)" for="inputText2"/>
+			<h:inputText id="inputText2" required="true" value="#{immediateBean.entradas['inputText2']}" immediate="false"></h:inputText>
+			<h:message for="inputText2"/>
+			<br/> 
+
+		</fieldset>
+		
+		<!-- Botones de acción -->
+		<h:commandButton immediate="true" action="#{immediateBean.accion}" value="Acción IMMEDIATE"/>
+		<h:commandButton immediate="false" action="#{immediateBean.accion}" value="Acción NO IMMEDIATE"/>
+	</h:form>
+</body>
+</html>
