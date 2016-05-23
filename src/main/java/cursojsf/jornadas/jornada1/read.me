@@ -4,47 +4,92 @@ Ejercicios jornada 1
 
 Ejercicio 1: Componentes de Salida
 
-1.a- Dado un el backing bean ComponentesBean ...
-1.a- Mostrar todos los componentes de salida de JSF básico
+1.a- Se proporciona un backing bean ya implementado ComponentesBean.
+1.b- Crear un fichero en /webapp/jornada1/salida.xhtml, donde se realizará una prueba de los siguientes componentes:
+	* h:outputText para mostrar una cadena de texto
+	* h:outputLabel para mostrar un label
+	* h:outputLink para mostrar un enlace que al clicarlo llame a la funcion javascript 'funcion'
+	* h:graphicImage para mostrar una imagen a partir de una URL (por ejemplo Google Images)
+	* h:outputFormat para formatear una cadena de texto con dos parámetros
+	* h:outputScript para definir una función javascript denominada 'funcion'
 
 ==================================================================================================
 
 Ejercicio 2: Botones
 
-1.a- Mostrar todos los tipos de botones exisentes
+1.a- Se proporciona un backing bean ya implementado ComponentesBean.
+1.b- Crear un fichero en /webapp/jornada1/botones.xhtml, donde se realizará una prueba de los siguientes componentes:
+	* h:commandButton que llame a la acción #{componenteBean.accion}
+	* h:commandLink que llame a la acción #{componenteBean.accion}
+	* h:button que vuelva a /jornada1/jornada1.xhtml
+	* h:link que vuelva a /jornada1/jornada1.xhtml
 
 ==================================================================================================
 
 Ejercicio 3: Componentes de Entrada
 
-1.a- Mostrar el comportamiento de los componentes de entrada existentes
-1.b- Mostrar el tipo de valor que se envia cuando se ejecuta una acción
-1.c- Mostrar el comportamiento del campo requerido
+1.a- Se proporciona un backing bean ya implementado ComponentesBean.
+1.b- Todas las entradas se mapearán contra el atributo del backing bean 'entradas' para no crear un atributo por cada componente
+1.c- Al ser un mapa, para cada atributo asignaremos una clave como por ejemplo #{componentesBean['inputText1']}
+1.e- Crear un fichero en /webapp/jornada1/entrada.xhtml, donde se realizará una prueba de los siguientes componentes:
+	* h:inputText si ninguna restricción
+	* h:inputText obligatorio
+	* h:inputTextarea sin ninguna restricción
+	* h:inputSecret sin ninguna restricción
+	* h:inputHidden sin ninguna restricción
+	* h:selectBooleanCheckbox
+	* h:selectManyCheckbox con los valores {Enero, Febrero, Marzo, Abril, Mayo}
+	* h:selectOneMenu con los valores {Enero, Febrero, Marzo, Abril, Mayo}
+	* h:selectOneRadio con los valores {Enero, Febrero, Marzo, Abril, Mayo}
+	* h:selectManyMenu con los valores {Enero, Febrero, Marzo, Abril, Mayo}
+	* h:selectOneListbox con los valores {Enero, Febrero, Marzo, Abril, Mayo}
+1.f- Además para cada campo de los del punto anterior asignarle un outputLabel para cada uno de ellos
+1.g- Añadir además los siguientes componentes:
+	* h:message asociado al inputText obligatorio del punt 1.e
+	* h:messages
+1-h- Añadir un botón h:commandLink en la parte inferior que ejecute la acción #{componentesBean.accion}
+1.i- Comprobar el resultado de la ejecución del botón cuando no se informa el campo obligatorio
+1.j- Ahora informar el campo obligatorio y probar con distintos valores en los distintos componentes de entrada
+	
 
 ==================================================================================================
 
 Ejercicio 4: Campos de iteración
 
-1.a- Mostrar el comportamiento del datatable.
+1.a- Se proporciona un backing bean ya implementado ComponentesBean.
+1.b- Definir un h:datatable que muestre el valor del listado que se encuentra en #{componentesBean.tabla}
+1.c- Para mostrar su valor en la tabla utilizar h:column
 
 ==================================================================================================
 
 Ejercicio 5: Layout
 
-1.a- Mostrar el comportamiento de los campos que nos ayudan a gestionar el layout en JSF
+1.a- Definir una tabla de dos columnas con h:panelGrid.
+1.b- Añadir 7 elementos a la tabla con el componente h:outputText
+1.c- Comprobar que se muestran en 4 filas distintas
+1.d- Agrupar los elementos 6 y 7 para hacer que se muestren en la última celda de la tercera fila. Para ello utilizar h:panelGroup.
+
 
 ==================================================================================================
 
-Ejercicio 6: Otros campos
+Ejercicio 6: Mostrar el comportamiento del ciclo de vida
 
-1.a- Mostrar los campos que se utilizan para mostrar los mensajes de la aplicación (message vs messages)
-
-==================================================================================================
-
-Ejercicio 7: Mostrar el comportamiento del ciclo de vida
-
-1.a- Activar el listener del ciclo de vida. Mostrar el comportamiento de este
-1.b- Mostrar el comportamiento cuando se producen errores de validación en el ciclo de vida
+1.a- Visualizar el contenido del fichero MyPhaseListener
+1.b- Descomentar en el faces-config.xml la siguiente linea:
+		<phase-listener>cursojsf.jornadas.jornada1.MyPhaseListener</phase-listener> 
+	Para activar el listener del ciclo de vida. Mostrar el comportamiento de este
 1.c- Mostrar el comportamiento del immediate en un formulario. Diferencias entre campos y botones con immediate.
 
 ==================================================================================================
+
+Ejercicio 7: Comportamiento del immediate
+1.a Crear un backing bean ImmediateBean similar al ComponentesBean proporcionado para la práctica
+1.b Crear un fichero /webapp/jornada1/immediate.xhtml donde tengamos
+	* Un campo de texto marcado como immediate = true asociado a una clave de atributo #{immediateBean.entradas['input1']}
+	* Un campo de texto marcado como immediate = false y required = true asociado a una clave de atributo #{immediateBean.entradas['input2']}
+	* Un botón h:commandButton marcado como immediate = false invocando a la acción #{immediateBean.accion}
+	* Un botón h:commandButton marcado como immediate = true invocando a la acción #{immediateBean.accion}
+1.c Ejecutar los botones sin informar campos e informando campos. Comprobar que los valores del input1 no se envian cuando no está cumplimentado el input2
+1.d Añadir un ValueChangeListener en el ImmediateBean con la signatura setInput1 que actualice el valor del model
+1.e Añadir a la definición del primer input la propiedad valueChangeListener="#{immediateBean.setInput1}"
+1.f Comprobar el comportamiento de los botones y que ocurre cuando clicamos sobre el boton marcado como immediate y que diferencias hay con el punto anterior.

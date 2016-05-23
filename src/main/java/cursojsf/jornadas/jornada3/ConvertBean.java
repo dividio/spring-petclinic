@@ -28,7 +28,7 @@ public class ConvertBean {
 		System.out.println("{");
 		for (Entry<String, Object> entry : entradas.entrySet()) {
 			System.out.println(entry.getKey() + "," + printValue(entry.getValue()) + "("
-					+ (entry.getValue() != null ? entry.getValue().getClass().toGenericString() : "") + ")");
+					+ (entry.getValue() != null ? entry.getValue().getClass().getName() : "") + ")");
 		}
 		System.out.println("}");
 		return resultado;
