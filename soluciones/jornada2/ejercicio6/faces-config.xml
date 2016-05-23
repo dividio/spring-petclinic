@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<faces-config version="2.2"
+              xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
+    <application>
+    	<resource-bundle>
+            <base-name>messages.messages</base-name>
+            <var>bundle</var>
+        </resource-bundle>
+        <!--
+            La definicion del siguiente resolver permite inyectar beans de spring
+            en los managed beans de JSF
+        -->
+        <el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
+        <locale-config>
+            <default-locale>es</default-locale>
+            <supported-locale>es</supported-locale>
+            <!--
+                Descomentar esta línea si se quiere soportar Inglés
+                <supported-locale>en</supported-locale>
+            -->
+        </locale-config>
+    </application>
+    <lifecycle>
+<!-- 	    <phase-listener>cursojsf.jornadas.jornada1.MyPhaseListener</phase-listener> -->
+	</lifecycle>
+	
+	<managed-bean>
+		<description>Bean Pagina</description>
+		<managed-bean-name>paginaBean</managed-bean-name>
+		<managed-bean-class>cursojsf.jornadas.jornada2.PaginaBean</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+		<managed-property>
+			<property-name>nombrePagina</property-name>
+			<value>Página inicial</value>
+		</managed-property>
+	</managed-bean>
+	
+	<managed-bean>
+		<description>Bean Primera Pagina</description>
+		<managed-bean-name>primeraPaginaBean</managed-bean-name>
+		<managed-bean-class>cursojsf.jornadas.jornada2.PaginaBean</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+		<managed-property>
+			<property-name>nombrePagina</property-name>
+			<value>Primera página</value>
+		</managed-property>
+	</managed-bean>
+	
+	<managed-bean>
+		<description>Bean Segunda Pagina</description>
+		<managed-bean-name>segundaPaginaBean</managed-bean-name>
+		<managed-bean-class>cursojsf.jornadas.jornada2.PaginaBean</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+		<managed-property>
+			<property-name>nombrePagina</property-name>
+			<value>Segunda página</value>
+		</managed-property>
+	</managed-bean>
+</faces-config>

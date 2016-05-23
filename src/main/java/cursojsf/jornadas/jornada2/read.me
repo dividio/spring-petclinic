@@ -76,3 +76,58 @@ request.getSession().invalidate();
 Bean de sesión. Añadimos un nuevo link en la página que llame al nuevo método. Repetimos el apartado 2.e 
 con los dos link. Si pulsamos en Navegar se mantiene la sesión, si pulsamos en el otro link vemos como 
 perdemos el valor del atributo destino tras invalidarse la sesión HTTP.
+
+==================================================================================================
+
+Ejercicio 5: Definición de un ManagedBean en el fichero faces-config
+
+5.a- Vamos a crear un nuevo fichero llamado PaginaBean.java, en el que tendremos un atributo String llamado 
+nombrePagina y un método llamado "volver" que devuelva la cadena "navegacion". No definimos ninguna anotación en este
+fichero.
+
+5.b- Modificamos el método "navegar" en el fichero Navegacion.java para devolver la cadena "pagina". 
+Eliminamos la acción "invalidarYNavegar" y declaramos el Bean de tipo request con la anotación 
+@RequestScoped. Eliminamos también el link que llamaba al método "invalidarYNavegar" de navegacion.xhtml.
+
+5.c- Abrimos el fichero faces-config.xml y definimos ahí un Bean llamado "paginaBean", cuya implementación es 
+la clase PaginaBean, de tipo request y le inyectamos la cadena "Página inicial" en el atributo nombrePagina.
+
+5.d- Creamos un fichero pagina.xhtml con un formulario, y dentro de el un H1 con el texto del atributo 
+nombrePagina de paginaBean y con un <h:commandLink> cuya acción sea el método "volver" de paginaBean.
+
+5.e- Desplegamos la aplicación y vemos que podemos navegar entre las dos páginas creadas, y que en 
+pagina.xhtml nos aparece el valor inyectado desde el faces-config.xml en el atributo "nombrePagina".
+
+==================================================================================================
+
+Ejercicio 6: Definición de varios ManagedBean con la misma implementación en el fichero faces-config
+
+6.a- Abrimos el fichero faces-config.xml y definimos ahí dos Bean llamados "primeraPaginaBean" y 
+"segundaPaginaBean", cuya implementación es la clase PaginaBean, de tipo request y les inyectamos las 
+cadenas "Primera página" y "Segunda página" respectivamente en el atributo nombrePagina.
+
+6.b- Creamos un fichero primeraPagina.xhtml, igual que pagina.xhtml pero cuyo Bean sea el llamado 
+"primeraPaginaBean". Creamos otro fichero igual llamado segundaPagina.xhtml y usamos el Bean llamado 
+"segundaPagina".
+
+6.c- En NavegacionBean, cambiamos el retorno del metodo navegar para que devuelva el atributo "destino", en 
+vez de una cadena de texto fija.
+
+6.d- Desplegamos la aplicación y vemos que podemos navegar entre las distintas páginas introduciendo el valor 
+de la regla de navegación que queremos usar en el input Destino. Las reglas de navegación que podemos usar 
+con "pagina", "primeraPagina", "segundaPagina".
+
+==================================================================================================
+
+Ejercicio 7: Definición de reglas de navegación en el fichero faces-config
+
+7.a- Crear en el fichero faces-config una regla de navegación genérica llamada volver, que nos lleve 
+a la página navegacion.xhtml.
+
+7.b- Crear en el mismo fichero una regla de navegación llamada "pagina1", que nos lleve desde la página 
+navegacion.xhtml a primeraPagina.xhtml.
+
+7.c- Sustituir en Pagina.java el retorno del método "volver" para devolver el String "volver".
+
+7.d- Desplegamos y comprobamos que desde cualquier página, al pulsar en el link Volver, retornamos a la 
+página de navegación y si en el input Destino escribimos "pagina1", nos redirige a la pantalla de "Primera página".
