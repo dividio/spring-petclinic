@@ -1,1 +1,35 @@
 Ejercicios jornada 4
+
+==================================================================================================
+
+Ejercicio 1: Evento Ajax en un botón
+
+1.a- Crear un bean OwnerBean que contenga una coleccion de Owner llamada "propietarios", un atributo "filtro" de tipo 
+String, un atributo "clientService" en el que se inyecte el servicio de fachada, y un método 
+buscar que llame en la fachada a findOwnerByLastName pasándo el atributo "filtro". 
+
+1.b- Crear una vista buscador.xhtml que contenga un input para el atributo "filtro" de OwnerBean, un botón 
+"Buscar" que llame a la método "buscar", y un componente h:dataTable para "propietarios" con las columnas 
+"Nombre", "Apellidos", "Dirección", "Ciudad", y "Teléfono".
+
+1.c- Añadir al botón buscar un evento Ajax para que en el evento click realice la búsqueda por nombre y 
+renderice la tabla con los resultados.  
+
+==================================================================================================
+
+Ejercicio 2: Evento Ajax en un componente de un formulario
+
+2.a- Sobre el ejemplo anterior, crear un evento Ajax en el input del filtro para que al perder el foco en el input se 
+renderice la tabla con los resultados correctos.
+
+==================================================================================================
+
+Ejercicio 3: Combos de valores dependientes mediante Ajax
+
+3.a- Crear un <h:selectOneMenu> con la lista completa de propietarios, y otro <h:selectOneMenu> que se 
+actualice mediante Ajax al cambiar el propietario con las mascotas de cada propietario. 
+
+==================================================================================================
+
+Ejercicio 4: Utilizacion de onerror y onevent
+
