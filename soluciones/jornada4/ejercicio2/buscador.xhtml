@@ -9,18 +9,18 @@
 <body>
 	<h:form>
 		<h:outputLabel for="inputFiltro">Filtro:</h:outputLabel>
-		<h:inputText id="inputFiltro" value="#{propietariosBean.filtro}">
+		<h:inputText id="inputFiltro" value="#{propietariosAjaxBean.filtro}">
 			<f:ajax event="keyup" execute="inputFiltro" 
-					listener="#{propietariosBean.buscarAjax}" render="tablaPropietarios"
+					listener="#{propietariosAjaxBean.buscarAjax}" render="tablaPropietarios"
 					delay="1000"/>
 		</h:inputText>
 		<br/>
-		<h:commandLink execute="inputFiltro" action="#{propietariosBean.buscar}" value="Filtrar"/>
+		<h:commandLink execute="inputFiltro" action="#{propietariosAjaxBean.buscar}" value="Filtrar"/>
 		<br/>
 		<h:commandLink  value="Filtrar Ajax">
-			<f:ajax event="click" execute="inputFiltro" listener="#{propietariosBean.buscarAjax}" render="tablaPropietarios"/>
+			<f:ajax event="click" execute="inputFiltro" listener="#{propietariosAjaxBean.buscarAjax}" render="tablaPropietarios"/>
 		</h:commandLink>
-		<h:dataTable id="tablaPropietarios" value="#{propietariosBean.listaPropietarios}" var="owner">
+		<h:dataTable id="tablaPropietarios" value="#{propietariosAjaxBean.listaPropietarios}" var="owner">
 			<h:column>
 				<f:facet name="header">
 					Nombre
@@ -47,7 +47,7 @@
 			</h:column>
 			<h:column>
 				<f:facet name="header">
-					Telefono
+					Telefefono
 				</f:facet>
 				<h:outputText value="#{owner.telephone}"/>
 			</h:column>

@@ -11,9 +11,9 @@ import javax.faces.event.AjaxBehaviorEvent;
 import org.springframework.samples.petclinic.model.Owner;
 import org.springframework.samples.petclinic.service.ClinicService;
 
-@ManagedBean(name = "propietariosBean")
+@ManagedBean(name = "propietariosAjaxBean")
 @RequestScoped
-public class PropietariosBean implements Serializable {
+public class PropietariosAjaxBean implements Serializable {
 
     /**
 	 * 
@@ -51,7 +51,7 @@ public class PropietariosBean implements Serializable {
 		this.filtro = filtro;
 	}
 
-	public PropietariosBean() {
+	public PropietariosAjaxBean() {
     }
 	
 	public String buscar() {
