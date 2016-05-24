@@ -15,6 +15,7 @@
  */
 package org.springframework.samples.petclinic.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -43,8 +44,14 @@ import org.springframework.core.style.ToStringCreator;
  */
 @Entity
 @Table(name = "owners")
-public class Owner extends Person {
-    @Column(name = "address")
+public class Owner extends Person implements Serializable {
+	
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 7877808132229847595L;
+
+	@Column(name = "address")
     @NotEmpty
     private String address;
 

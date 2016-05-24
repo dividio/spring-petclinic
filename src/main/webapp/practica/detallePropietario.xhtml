@@ -54,8 +54,11 @@
 		        			styleClass="form-control"/>
 		        			
 					<h:panelGroup/>
-					<h:commandButton value="Update Owner" styleClass="btn btn-default"/>
+					<h:commandButton value="Update Owner" styleClass="btn btn-default" 
+							action="#{detallePropietarioBean.guardar}"/>
 		        </h:panelGrid>
+		        <h:commandButton value="Back" styleClass="btn btn-default" immediate="true"
+							action="volver"/>
 			</h:form>
 		</div>
 	</div>  

@@ -1,18 +1,26 @@
 package cursojsf.practica;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.view.ViewScoped;
 
 import org.springframework.samples.petclinic.model.Owner;
 import org.springframework.samples.petclinic.model.Pet;
 import org.springframework.samples.petclinic.service.ClinicService;
 
 @ManagedBean(name = "detallePropietarioBean")
-public class DetallePropietarioBean {
+@ViewScoped
+public class DetallePropietarioBean implements Serializable {
 	
-    @ManagedProperty(value = "#{clinicServiceImpl}")
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 7369408853829327176L;
+
+	@ManagedProperty(value = "#{clinicServiceImpl}")
     private ClinicService clinicService;
     
     private Owner propietario;
@@ -54,7 +62,30 @@ public class DetallePropietarioBean {
 	}
 
 	public DetallePropietarioBean() {
+		System.out.println("Constructor");
+	}
+	
+	public String nuevo() {
+		this.propietario = new Owner();
+		return "nuevo";
+	}
+	
+	public String editar() {
 		this.propietario = getOwnerDummy(1);
+		return "editar";
+	}
+	
+	public String consultar() {
+		this.propietario = getOwnerDummy(1);
+		return "consultar";
+	}
+	
+	public String guardar() {
+		
+		// Guardamos el propietario
+		clinicService.saveOwner(propietario);
+		
+		return null;
 	}
 	
 	private Owner getOwnerDummy(int index) {
