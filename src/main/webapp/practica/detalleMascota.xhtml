@@ -5,25 +5,34 @@
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-<h:head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title><ui:insert name="title">PetClinic</ui:insert></title>
-	<h:outputStylesheet library="css" name="petclinic.css" />
-</h:head>
+<ui:composition template="plantilla.xhtml">
+	<ui:define name="titulo">
+	    <h:outputText value="Pet"/>
+	</ui:define>
+	<ui:define name="cuerpo">
 
-<h:body>
-
-	<div class="container-fluid">
-		<div class="container xd-container">
-			<h2>Pet</h2>
-
-			<h:form styleClass="mainForm">
+			<h:form styleClass="mainForm" id="mainForm">
 			
 				<h:inputHidden value="#{detalleMascotaBean.mascota.id}" />
 				<h:inputHidden value="#{detalleMascotaBean.idPropietario}" 
 					immediate="true" valueChangeListener="#{detalleMascotaBean.valueChangeListener}"/>
 				<h:inputHidden value="#{detalleMascotaBean.modoConsulta}"/>
 				<h:inputHidden value="#{detalleMascotaBean.modoConsultaPropietario}"/>
+				
+				<h:inputHidden id="formularioModificado" value="#{detalleMascotaBean.formularioModificado}"/>
+				
+				<h:outputScript>
+					isFormularioModificado = function () {
+						if (document.getElementById('mainForm:formularioModificado').value === 'true') {
+							return true;
+						}
+						return false;
+					};
+					
+					modificarFormulario = function () {
+						document.getElementById('mainForm:formularioModificado').value=true;
+					};
+				</h:outputScript>
 				
 				<h:panelGrid columns="3" columnClasses="col-xs-0,col-sm-2 control-label,col-sm-10" styleClass="col-sm-12" 
 					style="border-collapse: separate;border-spacing:  5px;" rendered="#{!detalleMascotaBean.modoConsulta}">
@@ -35,22 +44,28 @@
 					<!-- Fila 2: Nombre -->
 					<h:outputText value="Name" styleClass="control-label"/>
 					<h:panelGroup>
-						<h:inputText value="#{detalleMascotaBean.mascota.name}" id="petName" styleClass="form-control"/>
+						<h:inputText value="#{detalleMascotaBean.mascota.name}" id="petName" styleClass="form-control" required="true"
+							onchange="modificarFormulario();"/>
 						<h:message for="petName"/>
 					</h:panelGroup>
 					
 					<!-- Fila 3: Fecha de nacimiento -->
 					<h:outputText value="BirthDate" styleClass="control-label"/>
 					<h:panelGroup>
-						<h:inputText value="#{detalleMascotaBean.mascota.birthDate}" id="birthDate" styleClass="form-control"/>
+						<h:inputText value="#{detalleMascotaBean.mascota.birthDate}" id="birthDate" styleClass="form-control" required="true"
+							onchange="modificarFormulario();">
+							<f:convertDateTime pattern="dd/MM/yyyy"/>
+						</h:inputText>
 						<h:message for="birthDate"/>
 					</h:panelGroup>
 					
 					<!-- Fila 4: Tipo-->
 					<h:outputText value="Type" styleClass="control-label"/>
 					<h:panelGroup>
-						<h:selectOneListbox value="#{detalleMascotaBean.mascota.type}" id="type" styleClass="form-control">
-							<f:selectItems value="#{detalleMascotaBean.petTypes}" var="item" itemLabel="#{item.name}" itemValue="#{item.id}"></f:selectItems>
+						<h:selectOneListbox value="#{detalleMascotaBean.mascota.type}" id="type" styleClass="form-control" 
+							converter="petTypeConverter" required="true" 
+							onselect="modificarFormulario();" onchange="modificarFormulario();" onclick="modificarFormulario();">
+							<f:selectItems value="#{detalleMascotaBean.petTypes}" var="item" itemLabel="#{item.name}" itemValue="#{item}"/>
 						</h:selectOneListbox>
 						<h:message for="type"/>
 					</h:panelGroup>
@@ -86,7 +101,8 @@
 				
 				<h:commandButton value="Back" styleClass="btn btn-default" immediate="true" 
 							rendered="#{!detalleMascotaBean.modoConsultaPropietario}"
-							action="#{detallePropietarioBean.editar(detalleMascotaBean.idPropietario)}"/>
+							action="#{detallePropietarioBean.editar(detalleMascotaBean.idPropietario)}"
+							onclick="if (isFormularioModificado()) {return confirm('¿Está seguro que desea volver si guardar los cambios?');}"/>
 							
 				<h:commandButton value="Back" styleClass="btn btn-default" immediate="true" 
 							rendered="#{detalleMascotaBean.modoConsultaPropietario}"
@@ -94,8 +110,6 @@
 				
 			</h:form>
 			
-		</div>
-	</div>
-</h:body>
-
+	</ui:define>
+</ui:composition>
 </html>

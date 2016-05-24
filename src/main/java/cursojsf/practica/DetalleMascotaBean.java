@@ -26,6 +26,8 @@ public class DetalleMascotaBean {
 	
 	private Integer idPropietario;
 	
+	private Boolean formularioModificado = Boolean.FALSE;
+	
 	public Pet getMascota() {
 		return mascota;
 	}
@@ -66,8 +68,6 @@ public class DetalleMascotaBean {
 		this.modoConsultaPropietario = modoConsultaPropietario;
 	}
 
-	
-
 	public Integer getIdPropietario() {
 		return idPropietario;
 	}
@@ -76,6 +76,13 @@ public class DetalleMascotaBean {
 		this.idPropietario = idPropietario;
 	}
 
+	public Boolean getFormularioModificado() {
+		return formularioModificado;
+	}
+
+	public void setFormularioModificado(Boolean formularioModificado) {
+		this.formularioModificado = formularioModificado;
+	}
 
 
 	@ManagedProperty(value = "#{clinicServiceImpl}")
