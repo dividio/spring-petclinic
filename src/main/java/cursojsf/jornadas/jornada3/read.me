@@ -2,20 +2,80 @@ Ejercicios jornada 3
 
 ==================================================================================================
 
-Ejercicio 1: Explicación de los componentes de CORE - taglib f
+Ejercicio 1: Ejemplo de actionListener/propertyActionListener/valueChangeListener
 
-1.a- f:actionListener f:setPropertyActionListener, f:valueChangeListener
-1.b- f:attribute f:attributes
-1.c- f:convert f:convertDateTime f:convertNumber
-1.f- f:validate*
-1.e- f:facet
+==================================================================================================
+
+Ejercicio 2: Ejemplo de attribute/attributes
+
+==================================================================================================
+
+Ejercicio 3: Conversores
+
+1.a Crear un backing bean ConvertBean similar al que se hizo en la jornada 1 de ComponentesBean, pero sólo en el mapa de entradas y la acción 'accion'.
+1.b Crear el siguiente xhtml en /webapp/jornada3/convertion.xhtml donde tengamos los siguientes campos
+	* Un campo de entrada que tenga una conversión a un valor numérico
+	* Un campo de entrada que tenga una conversión a un campo de fecha
+1.c Crear una clase NifConverter que sea un Conversor con el siguiente comportamiento:
+	* Al recibir una cadena de entrada, suponiendo que la letra del nif se encuentra el la última posición
+	* Realizar la conversión para completar con ceros aquellos elementos que le falten, de forma que el ejemplo (1M, se convierta en 00000001M)
+1.d Añadir un campo de entrada que utilice la conversión utilizada en el conversor definido en el punto anterior
+1.e Añadir dos botones en la parte inferior que utilicen como acción #{convertBean.accion} uno immediate y el otro no.
+1.f Comprobar el comportamiento de las validaciones.
+
+==================================================================================================
+
+Ejercicio 4: Validadores
+
+1.a Crear un backing bean ValidationBean similar al que se hizo en la jornada 1 de ComponentesBean, pero sólo en el mapa de entradas y la acción 'accion'.
+1.b Crear el siguiente xhtml en /webapp/jornada3/validation.xhtml donde tengamos los siguientes campos, y a todos ellos le añadiremos un h:message para ver que mensaje se está generando
+	* Un campo de entrada con validación de requerido
+	* Un campo de entrada con validación de longitud entre 10 y 20 caracteres
+	* Un campo de entrada con validación numérica (double) para que se encuentre entre 10 y 20
+	* Un campo de entrada con validación numérica (long) para que se encuentre entre 10 y 20
+	* Un campo de entrada con validación por medio de una expresión regular para que sólo tenga un caracter y sea numérico
+1.c Crear una clase Emailvalidator que tenga la estructura de un validador, para que valide el formato de un correo electrónico.
+	Para no implementar el validador completo utilizar la utilidad de apache commons: org.apache.commons.validator.routines.EmailValidator para validar que el formato del correo electrónico es correcto
+1.d Crear un campo más de entrada en el xhtml que utilice la validación que se ha implementado en el punto anterior
+1.e Añadir dos botones en la parte inferior que utilicen como acción #{validationBean.accion} uno immediate y el otro no.
+1.f Comprobar el comportamiento de las validaciones.	
+
+==================================================================================================
+
+Ejercicio 5: Facet
+
+1.a Crear un backing bean FacetBean similar al que se hizo en la jornada 1 de ComponentesBean, pero sólo con la información de la tabla
+1.b Crear el siguiente xhtml en /webapp/jornada3/facet.xhtml donde tengamos tengamos una tabla similar a la de la jornada 1
+1.c Utilizar f:facet para poder customizar el texto de cabecera y de pie de las columnas de la tabla 	 
 
 
 ==================================================================================================
 
-Ejercicio 2: Explicación de los componentes de facelets - taglib ui
+Ejercicio 6: Include / Decorate
 
-1.a- ui:include, ui:define, ui:insert, ui:decorate, ui:fragment, ui:param
-1.b- ui:repeat
+1.a Se provee de los siguientes BackingBeans IncludeBean y Decorate bean para no tener que implementarlos
+1.b Crear el siguiente xhtml en /webapp/jornada3/fragment.xhtml donde tengamos lo siguiente:
+	* Un ouputtext que muestre la cadena "Título" y un valor que reciba como parámetro denominado "titulo"
+	* Un ouputtext que muestre la cadena "Descripción" y un valor que reciba como parámetro denominado "descripcion"
+	* Un inputText que escriba su valor en una variable que se encuentre en un parámetro de entrada 'mbean' en la propiedad 'entradas' que será un mapa
+	* Un selectManyCheckBox que mapee su valor contra una clave de #{mbean.entradas} y que tenga dos items: (value: A, Label: Letra A)(value: B, Label: Letra B)
+		 Permitir en el selectManyCheckBox  que se puedan meter más elementos con un ui:insert con el nombre "items"
+	* Un botón que llame a la acción #{mbean.accion}
+1.c El fragmento creado no tiene capacidad de ser mostrar por si solo, sino que será incluido/decorado por otro xhtml. Para ello crear 	/webapp/jornada3/include.xhtml donde
+	* Metamos un include del fragment, pasandole la información que necesita. En el caso del backing bean pasarle includeBean
+	* Metamos un decorate del fragment, pasandole la información que necesita. En el caso del backing bean pasarle decoreateBean. Además añadir 2 nuevos items al selectManyCheckBox
+		(value: C, Label: Letra C)(value: D, Label: Letra D)
+1.d Comprobar que pasa cuando vamos llamando a la acción de cada uno de las formas de incluir que hemos utilizado.
 
 ==================================================================================================
+
+Ejercicio 7: Repeat
+
+1.a Se provee de los siguientes BackingBeans FaceletBeans que tiene los elementos de la tabla de las prácticas de la jornada1.
+1.b Crear el siguiente xhtml en /webapp/jornada3/repeat.xhtml donde tengamos lo siguiente:
+	* Un campo de texto con outputText donde su valor se obtenga del String del faceletsBean.repeticiones
+	* Un botón h:commandLink que tenga como texto "Clicame" y al clicar se muestra un alert javascript con el texto igual que aparece el el outputText. 
+		Además al clicar el botón no se realizará ninguna operación el servidor.
+
+==================================================================================================
+
