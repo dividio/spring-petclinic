@@ -68,5 +68,13 @@
 			<from-outcome>volver</from-outcome>
 			<to-view-id>practica/detallePropietario.xhtml</to-view-id>
 		</navigation-case>
+		<navigation-case>
+			<from-outcome>editar</from-outcome>
+			<to-view-id>practica/detallePropietario.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>consultar</from-outcome>
+			<to-view-id>practica/detallePropietario.xhtml</to-view-id>
+		</navigation-case>
 	</navigation-rule>
 </faces-config>

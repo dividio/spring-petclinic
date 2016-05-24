@@ -82,6 +82,10 @@
 								action="#{detallePropietarioBean.guardar}"/>
 			        </h:panelGrid>
 		        </h:panelGroup>
+		        
+		        <h:commandLink action="#{detalleMascotaBean.nuevo(detallePropietarioBean.propietario.id)}" styleClass="btn btn-default" 
+		        	 value="New Pet" rendered="#{not detallePropietarioBean.modoConsulta}"/>
+		        
 		        <h:commandButton value="Back" styleClass="btn btn-default" immediate="true"
 							action="volver"/>
 			</h:form>

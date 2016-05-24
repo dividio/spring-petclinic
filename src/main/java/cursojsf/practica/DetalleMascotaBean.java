@@ -1,14 +1,13 @@
 package cursojsf.practica;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.model.SelectItem;
+import javax.faces.component.UIInput;
+import javax.faces.event.ValueChangeEvent;
 
-import org.joda.time.LocalDate;
 import org.springframework.samples.petclinic.model.Owner;
 import org.springframework.samples.petclinic.model.Pet;
 import org.springframework.samples.petclinic.model.PetType;
@@ -22,7 +21,11 @@ public class DetalleMascotaBean {
 	private List<PetType> tiposMascota;
 
 	private Boolean modoConsulta;
-
+	
+	private Boolean modoConsultaPropietario;
+	
+	private Integer idPropietario;
+	
 	public Pet getMascota() {
 		return mascota;
 	}
@@ -54,12 +57,31 @@ public class DetalleMascotaBean {
 	public void setClinicService(ClinicService clinicService) {
 		this.clinicService = clinicService;
 	}
+	
+	public Boolean getModoConsultaPropietario() {
+		return modoConsultaPropietario;
+	}
+
+	public void setModoConsultaPropietario(Boolean modoConsultaPropietario) {
+		this.modoConsultaPropietario = modoConsultaPropietario;
+	}
+
+	
+
+	public Integer getIdPropietario() {
+		return idPropietario;
+	}
+
+	public void setIdPropietario(Integer idPropietario) {
+		this.idPropietario = idPropietario;
+	}
+
+
 
 	@ManagedProperty(value = "#{clinicServiceImpl}")
 	private ClinicService clinicService;
 
 	public DetalleMascotaBean() {
-		this.mascota = getPetDummy();
 	}
 	
 	public  List<PetType> getPetTypes() {
@@ -67,32 +89,51 @@ public class DetalleMascotaBean {
 		return tiposMascota;
 	}
 
-	private Pet getPetDummy() {
-		
-		Pet resultado = new Pet();
-		Owner owner = getOwnerDummy(0);
-
-		resultado.setName("Mascota ");
-		resultado.setBirthDate(LocalDate.fromCalendarFields(Calendar.getInstance()));
-		resultado.setId(1);
-		owner.addPet(resultado);
-		
-		return resultado;
+	public String nuevo(Integer idPropietario) {
+		this.mascota = new Pet();
+		Owner owner = this.clinicService.findOwnerById(idPropietario);
+		owner.addPet(mascota);
+		this.modoConsulta = Boolean.FALSE;
+		this.modoConsultaPropietario = Boolean.FALSE;
+		this.idPropietario = idPropietario;
+		return "nuevo";
 	}
 	
-	private Owner getOwnerDummy(int index) {
-		Owner resultado = new Owner();
-
-		resultado.setAddress("Dirección " + index);
-		resultado.setCity("Ciudad " + index);
-		resultado.setFirstName("Nombre " + index);
-		resultado.setId(index);
-		resultado.setLastName("Apellido " + index);
-		resultado.setTelephone("+" + index + " 999999999");
-		
-		return resultado;
+	public String editar(Integer idMascota, Boolean modoConsultaPropietario) {
+		if (idMascota != null) {
+			this.mascota= clinicService.findPetById(idMascota);
+		}
+		this.modoConsultaPropietario = modoConsultaPropietario;
+		this.modoConsulta = Boolean.FALSE;
+		this.idPropietario = this.mascota.getOwner().getId();
+		return "editar";
+	}
+	
+	public String consultar(Integer idMascota, Boolean modoConsultaPropietario) {
+		if (idMascota != null) {
+			this.mascota= clinicService.findPetById(idMascota);
+		}
+		this.modoConsultaPropietario = modoConsultaPropietario;
+		this.modoConsulta = Boolean.TRUE;
+		this.idPropietario = this.mascota.getOwner().getId();
+		return "consultar";
 	}
 
+	public String guardar() {
+		
+		// Guardamos el propietario
+		clinicService.savePet(this.mascota);
+		
+		return null;
+	}
 	
+	public void valueChangeListener(ValueChangeEvent event) {
+		
+		// Actualizamos el modelo de forma manual
+		idPropietario = Integer.valueOf(event.getNewValue().toString());
+	     
+	    // Previene que el setter sea llamado en futuras phases
+	    ((UIInput) event.getComponent()).setLocalValueSet(false);
+	}
 
 }
