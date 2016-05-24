@@ -1,19 +1,31 @@
 package cursojsf.practica;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.ViewScoped;
 
 import org.springframework.samples.petclinic.model.Owner;
-import org.springframework.samples.petclinic.model.Pet;
+import org.springframework.samples.petclinic.service.ClinicService;
 
 @ManagedBean(name = "propietariosBean")
-public class PropietariosBean {
+@ViewScoped
+public class PropietariosBean implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	private List<Owner> propietarios;
 
 	private String filtro;
+	
+	@ManagedProperty(value = "#{clinicServiceImpl}")
+    private ClinicService clinicService;
 
 	public List<Owner> getPropietarios() {
 		return propietarios;
@@ -30,37 +42,21 @@ public class PropietariosBean {
 	public void setFiltro(String filtro) {
 		this.filtro = filtro;
 	}
+	
+	public ClinicService getClinicService() {
+		return clinicService;
+	}
+
+	public void setClinicService(ClinicService clinicService) {
+		this.clinicService = clinicService;
+	}
 
 	public PropietariosBean() {
-		this.propietarios = this.getDummy();
 	}
-
-	private List<Owner> getDummy() {
-		List<Owner> resultado = new ArrayList<>();
-
-		for (int i = 0; i < 10; i++) {
-			resultado.add(getOwnerDummy(i));
-		}
-
-		return resultado;
-	}
-
-	private Owner getOwnerDummy(int index) {
-		Owner resultado = new Owner();
-
-		resultado.setAddress("Dirección " + index);
-		resultado.setCity("Ciudad " + index);
-		resultado.setFirstName("Nombre " + index);
-		resultado.setId(index);
-		resultado.setLastName("Apellido " + index);
-		resultado.setTelephone("+" + index + " 999999999");
-		
-		// Se añade una mascota
-		Pet pet = new Pet();
-		pet.setName("Mascota " + index);
-		resultado.addPet(pet);
-
-		return resultado;
+	
+	public String filtrar() {
+		this.propietarios = new ArrayList<>(clinicService.findOwnerByLastName(this.filtro));
+		return null;
 	}
 
 }
