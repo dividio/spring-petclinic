@@ -3,9 +3,12 @@ package cursojsf.practica;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.samples.petclinic.model.Owner;
 import org.springframework.samples.petclinic.model.Pet;
@@ -63,6 +66,17 @@ public class DetallePropietarioBean implements Serializable {
 
 	public DetallePropietarioBean() {
 		this.propietario = new Owner();
+	}
+	
+	@PostConstruct
+	public void postConstruct() {
+		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+		String idPropietario = request.getParameter("mainForm:propietario");
+		if (idPropietario == null) {
+			this.propietario = new Owner();
+		} else {
+			this.propietario = clinicService.findOwnerById(Integer.valueOf(idPropietario));
+		}
 	}
 	
 	public String nuevo() {

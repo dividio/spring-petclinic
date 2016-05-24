@@ -11,8 +11,8 @@
 	</ui:define>
 	<ui:define name="cuerpo">
         
-		<h:form styleClass="mainForm">
-			<h:inputHidden value="#{detallePropietarioBean.propietario}">
+		<h:form styleClass="mainForm" id="mainForm">
+			<h:inputHidden value="#{detallePropietarioBean.propietario}" id="propietario">
 				<f:converter converterId="ownerConverter"/>
 		    </h:inputHidden>
 			<h:inputHidden value="#{detallePropietarioBean.modoConsulta}"/>
@@ -86,7 +86,7 @@
 						action="volver"/>
 				<br/>
 				<br/>
-				<h:dataTable value="#{detallePropietarioBean.propietario.pets}" var="pet"
+				<h:dataTable value="${detallePropietarioBean.propietario.pets}" var="pet"
 						border="0" cellpadding="2" cellspacing="0"
 						styleClass="table table-striped" rendered="#{not empty detallePropietarioBean.propietario.pets}"
 						rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all"
