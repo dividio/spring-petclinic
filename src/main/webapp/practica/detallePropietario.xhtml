@@ -12,7 +12,9 @@
 	<ui:define name="cuerpo">
         
 		<h:form styleClass="mainForm">
-			<h:inputHidden value="#{detallePropietarioBean.propietario.id}"/>
+			<h:inputHidden value="#{detallePropietarioBean.propietario}">
+				<f:converter converterId="ownerConverter"/>
+		    </h:inputHidden>
 			<h:inputHidden value="#{detallePropietarioBean.modoConsulta}"/>
 			
 			<h:panelGroup rendered="#{detallePropietarioBean.modoConsulta}">
@@ -82,6 +84,23 @@
 		       
 		       <h:commandButton value="Back" styleClass="btn btn-default" immediate="true"
 						action="volver"/>
+				<br/>
+				<br/>
+				<h:dataTable value="#{detallePropietarioBean.propietario.pets}" var="pet"
+						border="0" cellpadding="2" cellspacing="0"
+						styleClass="table table-striped" rendered="#{not empty detallePropietarioBean.propietario.pets}"
+						rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all"
+						style="border:solid 1px">
+					<h:column>
+						<h:outputText value="#{pet.name}"/>
+					</h:column>
+					<h:column>
+						<h:commandLink value="Editar" action="#{detalleMascotaBean.editar(pet.id, detallePropietarioBean.modoConsulta)}"/>
+					</h:column>
+					<h:column>
+						<h:commandLink value="Consultar" action="#{detalleMascotaBean.consultar(pet.id, detallePropietarioBean.modoConsulta)}"/>
+					</h:column>
+				</h:dataTable>
 		</h:form>
 	</ui:define>
 </ui:composition>
