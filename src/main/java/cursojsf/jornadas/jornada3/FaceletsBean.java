@@ -1,5 +1,6 @@
 package cursojsf.jornadas.jornada3;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +9,13 @@ import javax.faces.bean.SessionScoped;
 
 @ManagedBean(name = "faceletsBean")
 @SessionScoped
-public class FaceletsBean {
+public class FaceletsBean implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 
 	private List<String> repeticiones = new ArrayList<>();
 

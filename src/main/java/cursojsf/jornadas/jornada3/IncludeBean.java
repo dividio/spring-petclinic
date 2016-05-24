@@ -1,5 +1,6 @@
 package cursojsf.jornadas.jornada3;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
 import javax.faces.bean.ManagedBean;
@@ -7,7 +8,13 @@ import javax.faces.bean.SessionScoped;
 
 @ManagedBean(name = "includeBean")
 @SessionScoped
-public class IncludeBean {
+public class IncludeBean implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 
 	private HashMap<String, Object> entradas= new HashMap<String, Object>();
 

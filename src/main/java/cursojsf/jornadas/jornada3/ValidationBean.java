@@ -1,8 +1,7 @@
 package cursojsf.jornadas.jornada3;
 
-import java.util.ArrayList;
+import java.io.Serializable;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map.Entry;
 
 import javax.faces.bean.ManagedBean;
@@ -10,7 +9,12 @@ import javax.faces.bean.SessionScoped;
 
 @ManagedBean(name = "validationBean")
 @SessionScoped
-public class ValidationBean {
+public class ValidationBean implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	private HashMap<String, Object> entradas = new HashMap<String, Object>();
 
@@ -30,31 +34,31 @@ public class ValidationBean {
 		System.out.println("{");
 		for (Entry<String, Object> entry : entradas.entrySet()) {
 			System.out.println(entry.getKey() + "," + printValue(entry.getValue()) + "("
-					+ (entry.getValue() != null ? entry.getValue().getClass().toGenericString() : "") + ")");
+					+ (entry.getValue() != null ? entry.getValue().getClass().getName() : "") + ")");
 		}
 		System.out.println("}");
 		return resultado;
 	}
-	
+
 	private String printValue(Object object) {
 		if (object == null) {
 			return "null";
 		}
-		
+
 		if (object instanceof String[]) {
-			
+
 			if (((String[]) object).length == 0) {
 				return "[]";
 			}
-			
+
 			String resultado = "[";
 			for (String o : (String[]) object) {
 				resultado += o + ",";
 			}
-			resultado +="]";
+			resultado += "]";
 			return resultado;
 		}
-		
+
 		return object.toString();
 	}
 

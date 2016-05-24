@@ -1,16 +1,21 @@
 package cursojsf.jornadas.jornada3;
 
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map.Entry;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 @ManagedBean(name = "facetBean")
 @SessionScoped
-public class FacetBean {
+public class FacetBean implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 
 	private List<String> tabla = new ArrayList<>();
 

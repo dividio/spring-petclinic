@@ -1,5 +1,6 @@
 package cursojsf.jornadas.jornada1;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -10,7 +11,12 @@ import javax.faces.bean.SessionScoped;
 
 @ManagedBean(name = "componentesBean")
 @SessionScoped
-public class ComponentesBean {
+public class ComponentesBean implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	private List<String> tabla = new ArrayList<>();
 
