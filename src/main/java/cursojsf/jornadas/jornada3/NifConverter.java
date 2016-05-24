@@ -5,6 +5,7 @@ import java.text.DecimalFormat;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
+import javax.faces.convert.ConverterException;
 import javax.faces.convert.FacesConverter;
 
 @FacesConverter("nifConverter")
@@ -21,13 +22,14 @@ public class NifConverter implements Converter {
 					String numero = arg2.substring(0, arg2.length() - 1);
 					return df.format(Integer.valueOf(numero)) + letra.toUpperCase();
 				} else {
-					return arg2;
+					throw new ConverterException("La cadena no tiene el formato correcto");
 				}
 			} catch (Exception e) {
-				return arg2;
+				throw new ConverterException("La cadena no tiene el formato correcto");
 			}
 		}
-		// TODO Auto-generated method stub
+		
+		// Se devuelve vacio
 		return null;
 	}
 

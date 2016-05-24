@@ -23,8 +23,8 @@ Ejercicio 2: Conversores
 
 1.a Crear un backing bean ConvertBean similar al que se hizo en la jornada 1 de ComponentesBean, pero sólo en el mapa de entradas y la acción 'accion'.
 1.b Crear el siguiente xhtml en /webapp/jornada3/convertion.xhtml donde tengamos los siguientes campos
-	* Un campo de entrada que tenga una conversión a un valor numérico
-	* Un campo de entrada que tenga una conversión a un campo de fecha
+	* Un campo de entrada que tenga una conversión a un valor numérico de sólo entero
+	* Un campo de entrada que tenga una conversión a un campo de fecha con el patrón 25/05/2016
 1.c Crear una clase NifConverter que sea un Conversor con el siguiente comportamiento:
 	* Al recibir una cadena de entrada, suponiendo que la letra del nif se encuentra el la última posición
 	* Realizar la conversión para completar con ceros aquellos elementos que le falten, de forma que el ejemplo (1M, se convierta en 00000001M)
@@ -62,7 +62,7 @@ Ejercicio 4: Facet
 
 Ejercicio 5: Include / Decorate
 
-1.a Se provee de los siguientes BackingBeans IncludeBean y Decorate bean para no tener que implementarlos
+1.a Se provee de los siguientes BackingBean IncludeBean y DecorateBean para no tener que implementarlos
 1.b Crear el siguiente xhtml en /webapp/jornada3/fragment.xhtml donde tengamos lo siguiente:
 	* Un ouputtext que muestre la cadena "Título" y un valor que reciba como parámetro denominado "titulo"
 	* Un ouputtext que muestre la cadena "Descripción" y un valor que reciba como parámetro denominado "descripcion"

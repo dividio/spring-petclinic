@@ -12,17 +12,17 @@
 			<legend>Conversiones Por Defecto</legend>
 			
 			<!-- Ejemplo de conversion de numero -->
-			<h:outputLabel value="Entrada 1" for="inputText1"/>
+			<h:outputLabel value="Entrada 1 - Valor númerico entero" for="inputText1"/>
 			<h:inputText value="#{convertBean.entradas['INPUT1']}" required="false" id="inputText1">
-				<f:convertNumber/>
+				<f:convertNumber integerOnly="true"/>
 			</h:inputText>
 			<h:message for="inputText1"/>
 			<br/>
 			
 			<!-- Ejemplo de conversion de fecha -->
-			<h:outputLabel value="Entrada 2" for="inputText2"/>
+			<h:outputLabel value="Entrada 2 - Campo de fecha" for="inputText2"/>
 			<h:inputText value="#{convertBean.entradas['INPUT2']}" required="false" id="inputText2">
-				<f:convertDateTime/>
+				<f:convertDateTime pattern="dd/MM/yyyy"/>
 			</h:inputText>
 			<h:message for="inputText2"/>
 			<br/>
@@ -33,7 +33,7 @@
 			<legend>Conversiones Propias</legend>
 			
 			<!-- Ejemplo de conversion NIF -->
-			<h:outputLabel value="Entrada 3" for="inputText3"/>
+			<h:outputLabel value="Entrada 3 -  Completador NIF" for="inputText3"/>
 			<h:inputText value="#{convertBean.entradas['INPUT3']}" required="false" id="inputText3">
 				<f:converter converterId="nifConverter"/>
 			</h:inputText>

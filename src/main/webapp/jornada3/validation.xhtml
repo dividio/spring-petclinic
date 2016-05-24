@@ -12,14 +12,14 @@
 			<legend>Conversiones Por Defecto</legend>
 			
 			<!-- Ejemplo de campo obligatorio -->
-			<h:outputLabel value="Entrada 1" for="inputText1"/>
+			<h:outputLabel value="Entrada 1 - Obligatorio" for="inputText1"/>
 			<h:inputText value="#{validationBean.entradas['INPUT1']}" required="true" id="inputText1">
 			</h:inputText>
 			<h:message for="inputText1"/>
 			<br/>
 			
 			<!-- Ejemplo de validación de longitud [10,20] -->
-			<h:outputLabel value="Entrada 2" for="inputText2"/>
+			<h:outputLabel value="Entrada 2 - Longitud máxima/mínima" for="inputText2"/>
 			<h:inputText value="#{validationBean.entradas['INPUT2']}" required="false" id="inputText2">
 				<f:validateLength minimum="10" maximum="20"/>
 			</h:inputText>
@@ -27,7 +27,7 @@
 			<br/>
 			
 			<!-- Ejemplo de validación de valor numérico -->
-			<h:outputLabel value="Entrada 3" for="inputText3"/>
+			<h:outputLabel value="Entrada 3 - Rango de double" for="inputText3"/>
 			<h:inputText value="#{validationBean.entradas['INPUT3']}" required="false" id="inputText3">
 				<f:validateDoubleRange minimum="10" maximum="20"/>
 			</h:inputText>
@@ -35,15 +35,15 @@
 			<br/>
 			
 			<!-- Ejemplo de validación de valor numérico -->
-			<h:outputLabel value="Entrada 4" for="inputText4"/>
+			<h:outputLabel value="Entrada 4 - Rango de long" for="inputText4"/>
 			<h:inputText value="#{validationBean.entradas['INPUT4']}" required="false" id="inputText4">
 				<f:validateLongRange maximum="20" minimum="10"></f:validateLongRange>
 			</h:inputText>
 			<h:message for="inputText4"/>
 			<br/>
 			
-			<!-- Ejemplo de validación del formato de una IP -->
-			<h:outputLabel value="Entrada 5" for="inputText5"/>
+			<!-- Ejemplo de validación del un valor numérico -->
+			<h:outputLabel value="Entrada 5 - Expresión regular" for="inputText5"/>
 			<h:inputText value="#{validationBean.entradas['INPUT5']}" required="false" id="inputText5">
 				<f:validateRegex pattern="[1-9]{1}"/>
 			</h:inputText>
@@ -57,7 +57,7 @@
 			<legend>Conversiones Propias</legend>
 			
 			<!-- Ejemplo de validación de correo electrónico -->
-			<h:outputLabel value="Entrada 6" for="inputText6"/>
+			<h:outputLabel value="Entrada 6 - Custom Correo Electrónico" for="inputText6"/>
 			<h:inputText value="#{validationBean.entradas['INPUT6']}" required="false" id="inputText6">
 				<f:validator validatorId="emailValidator"/>
 			</h:inputText>
