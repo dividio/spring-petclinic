@@ -4,32 +4,45 @@ Ejercicios jornada 4
 
 Ejercicio 1: Evento Ajax en un botón
 
-1.a- Crear un bean OwnerBean que contenga una coleccion de Owner llamada "propietarios", un atributo "filtro" de tipo 
-String, un atributo "clientService" en el que se inyecte el servicio de fachada, y un método 
-buscar que llame en la fachada a findOwnerByLastName pasándo el atributo "filtro". 
+1.a- Crear un bean PropietariosBean que contenga una coleccion de Owner llamada "propietarios", un atributo "filtro" 
+de tipo String, un atributo "clientService" en el que se inyecte el servicio de fachada. Incluir un método privado 
+"void buscar(String filtro)" que llame en la fachada a findOwnerByLastName pasándo el atributo "filtro", un método 
+público "String buscar()" que devuelva null como regla de navegación y que llame internamente al método 
+"buscar" privado, y un método "void buscarAjax(AjaxBehaviorEvent event)" que llame internamente al método 
+"buscar" privado.
 
 1.b- Crear una vista buscador.xhtml que contenga un input para el atributo "filtro" de OwnerBean, un botón 
 "Buscar" que llame a la método "buscar", y un componente h:dataTable para "propietarios" con las columnas 
 "Nombre", "Apellidos", "Dirección", "Ciudad", y "Teléfono".
 
-1.c- Añadir al botón buscar un evento Ajax para que en el evento click realice la búsqueda por nombre y 
-renderice la tabla con los resultados.  
+1.c- Añadir un <h:commandLink> que llame al método "String buscar()" y añadir otro <h:commandLink> que 
+mediante un evento Ajax en el click del enlace realice la búsqueda por nombre y renderice la tabla con los 
+resultados. Comprobar como la respuesta HTTP es diferente utilizando Ajax o sin utilizarlo, comparar también el tamaño 
+de las respuestas HTTP.
 
 ==================================================================================================
 
 Ejercicio 2: Evento Ajax en un componente de un formulario
 
-2.a- Sobre el ejemplo anterior, crear un evento Ajax en el input del filtro para que al perder el foco en el input se 
-renderice la tabla con los resultados correctos.
+2.a- Sobre el ejemplo anterior, crear un evento Ajax en el input del filtro para que según se escribe en el input se 
+redibuje la tabla con los resultados correctos.
 
 ==================================================================================================
 
 Ejercicio 3: Combos de valores dependientes mediante Ajax
 
-3.a- Crear un <h:selectOneMenu> con la lista completa de propietarios, y otro <h:selectOneMenu> que se 
-actualice mediante Ajax al cambiar el propietario con las mascotas de cada propietario. 
+3.a- Crear un Bean llamado SelectOneMenuBean en el que inyectaremos el servicio de fachada, y tendrá un 
+atributo "propietario" de tipo Owner, y otro atributo "mascota" de tipo Pet. Un método "getSelectItemsPropietarios"
+que devuelva la lista de SelectItem de propietarios, y un método "getSelectItemsMascotas" que devuelva la lista 
+de SelectItem de mascotas del propietario seleccionado.
+
+3.b- Crear una pantalla "selectOneMenu.xhtml" con un <h:selectOneMenu> con la lista completa de propietarios, y 
+otro <h:selectOneMenu> que se actualice mediante Ajax al cambiar el propietario con las mascotas de dicho 
+propietario. Utilizar los converter "ownerConverter" y "petConverter" definidos en el directorio de la práctica.
 
 ==================================================================================================
 
-Ejercicio 4: Utilizacion de onerror y onevent
+Ejercicio 4: Utilización de onerror y onevent
+
+
 

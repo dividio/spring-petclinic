@@ -1,0 +1,23 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<h:outputScript library="javax.faces" name="jsf.js" target="head" />
+</h:head>
+<body>
+	<h:form>
+		<h:selectOneMenu id="selectPropietarios" value="#{selectOneMenuBean.propietario}" >
+			<f:selectItems value="#{selectOneMenuBean.selectItemsPropietarios}"/>
+			<f:converter converterId="ownerConverter"/>
+			<f:ajax event="change" execute="selectPropietarios" render="selectMascotas"/>
+		</h:selectOneMenu>
+		<br/>
+		<h:selectOneMenu id="selectMascotas" value="#{selectOneMenuBean.mascota}">
+			<f:selectItems value="#{selectOneMenuBean.selectItemsMascotas}"/>
+			<f:converter converterId="petConverter"/>
+		</h:selectOneMenu>
+	</h:form>  
+</body>
+</html>

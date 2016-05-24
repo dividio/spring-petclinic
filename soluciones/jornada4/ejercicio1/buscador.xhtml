@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<h:outputScript library="javax.faces" name="jsf.js" target="head" />
+</h:head>
+<body>
+	<h:form>
+		<h:outputLabel for="inputFiltro">Filtro:</h:outputLabel>
+		<h:inputText id="inputFiltro" value="#{propietariosBean.filtro}"/>
+		<br/>
+		<h:commandLink execute="inputFiltro" action="#{propietariosBean.buscar}" value="Filtrar"/>
+		<br/>
+		<h:commandLink  value="Filtrar Ajax">
+			<f:ajax event="click" execute="inputFiltro" listener="#{propietariosBean.buscarAjax}" render="tablaPropietarios"/>
+		</h:commandLink>
+		<h:dataTable id="tablaPropietarios" value="#{propietariosBean.listaPropietarios}" var="owner">
+			<h:column>
+				<f:facet name="header">
+					Nombre
+				</f:facet>
+				<h:outputText value="#{owner.firstName}"/>
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					Apellidos
+				</f:facet>
+				<h:outputText value="#{owner.lastName}"/>
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					Direccion
+				</f:facet>
+				<h:outputText value="#{owner.address}"/>
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					Ciudad
+				</f:facet>
+				<h:outputText value="#{owner.city}"/>
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					Telefono
+				</f:facet>
+				<h:outputText value="#{owner.telephone}"/>
+			</h:column>
+		</h:dataTable>
+	</h:form>  
+</body>
+</html>
