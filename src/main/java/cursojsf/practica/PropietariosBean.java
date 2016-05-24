@@ -7,6 +7,7 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.faces.event.AjaxBehaviorEvent;
 
 import org.springframework.samples.petclinic.model.Owner;
 import org.springframework.samples.petclinic.service.ClinicService;
@@ -58,5 +59,10 @@ public class PropietariosBean implements Serializable{
 		this.propietarios = new ArrayList<>(clinicService.findOwnerByLastName(this.filtro));
 		return null;
 	}
+	
+	public void buscarAjax(AjaxBehaviorEvent event) {
+		this.filtrar();
+	}
+	
 
 }
