@@ -2,15 +2,24 @@ Ejercicios jornada 3
 
 ==================================================================================================
 
-Ejercicio 1: Ejemplo de actionListener/propertyActionListener/valueChangeListener
+Ejercicio 1: Listeners y Atributos
+
+1.a Crear un backing bean ListenerBean similar al que se hizo en la jornada 1 de ComponentesBean, pero sólo en el mapa de entradas y la acción 'accion'.
+1.b Añadir un atributo al backing bean 'valor' y sus métodos get/set
+1.c Crear un actionListener, valueChangeListener que muestren un mensaje por consola indicando su ejecución.
+1.d Crear el siguiente xhtml en /webapp/jornada3/listener.xhtml donde tengamos lo siguiente:
+	* Un  campo de inputText que se asocie al valueChangeListener
+	  Además añadir un f:attribute para pasarle el atributo 'inputAdicional' con valor 'valorAdicional'
+	* Un botón que ejecute la acción #{listenerBean.accion} y que tenga como actionListener el definido anteriormente
+	  Además en el botón añadir un propertyActionListener para que establezca un valor al atributo listenerBean.valor
+	  Además añadir un f:attribute para pasarle el atributo 'botonAdicional' con valor 'valorAdicional'	
+1.e Modificar el actionListener y el valueChangeListener para que al mostrar el mensaje en la consulta muestre los atributos del componente 
+    Para el input el atributo 'inputAdicional'
+    Para el botón el atributo 'botonAdicional' 
 
 ==================================================================================================
 
-Ejercicio 2: Ejemplo de attribute/attributes
-
-==================================================================================================
-
-Ejercicio 3: Conversores
+Ejercicio 2: Conversores
 
 1.a Crear un backing bean ConvertBean similar al que se hizo en la jornada 1 de ComponentesBean, pero sólo en el mapa de entradas y la acción 'accion'.
 1.b Crear el siguiente xhtml en /webapp/jornada3/convertion.xhtml donde tengamos los siguientes campos
@@ -25,7 +34,7 @@ Ejercicio 3: Conversores
 
 ==================================================================================================
 
-Ejercicio 4: Validadores
+Ejercicio 3: Validadores
 
 1.a Crear un backing bean ValidationBean similar al que se hizo en la jornada 1 de ComponentesBean, pero sólo en el mapa de entradas y la acción 'accion'.
 1.b Crear el siguiente xhtml en /webapp/jornada3/validation.xhtml donde tengamos los siguientes campos, y a todos ellos le añadiremos un h:message para ver que mensaje se está generando
@@ -42,7 +51,7 @@ Ejercicio 4: Validadores
 
 ==================================================================================================
 
-Ejercicio 5: Facet
+Ejercicio 4: Facet
 
 1.a Crear un backing bean FacetBean similar al que se hizo en la jornada 1 de ComponentesBean, pero sólo con la información de la tabla
 1.b Crear el siguiente xhtml en /webapp/jornada3/facet.xhtml donde tengamos tengamos una tabla similar a la de la jornada 1
@@ -51,7 +60,7 @@ Ejercicio 5: Facet
 
 ==================================================================================================
 
-Ejercicio 6: Include / Decorate
+Ejercicio 5: Include / Decorate
 
 1.a Se provee de los siguientes BackingBeans IncludeBean y Decorate bean para no tener que implementarlos
 1.b Crear el siguiente xhtml en /webapp/jornada3/fragment.xhtml donde tengamos lo siguiente:
@@ -69,7 +78,7 @@ Ejercicio 6: Include / Decorate
 
 ==================================================================================================
 
-Ejercicio 7: Repeat
+Ejercicio 6: Repeat
 
 1.a Se provee de los siguientes BackingBeans FaceletBeans que tiene los elementos de la tabla de las prácticas de la jornada1.
 1.b Crear el siguiente xhtml en /webapp/jornada3/repeat.xhtml donde tengamos lo siguiente:
