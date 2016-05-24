@@ -16,6 +16,21 @@
 				<f:converter converterId="ownerConverter"/>
 		    </h:inputHidden>
 			<h:inputHidden value="#{detallePropietarioBean.modoConsulta}"/>
+      
+            <h:inputHidden id="formularioModificado" value="#{detallePropietarioBean.formularioModificado}"/>
+                
+            <h:outputScript>
+                isFormularioModificado = function () {
+                    if (document.getElementById('mainForm:formularioModificado').value === 'true') {
+                        return true;
+                    }
+                    return false;
+                };
+                
+                modificarFormulario = function () {
+                    document.getElementById('mainForm:formularioModificado').value=true;
+                };
+            </h:outputScript>
 			
 			<h:panelGroup rendered="#{detallePropietarioBean.modoConsulta}">
 				<table class="table table-striped">
@@ -47,31 +62,44 @@
 		        			value="First Name"/>
 		        	<h:inputText id="inputFirstName" 
 		        			value="#{detallePropietarioBean.propietario.firstName}"
-		        			styleClass="form-control"/>
+		        			styleClass="form-control"
+                            required="true"
+                            onchange="modificarFormulario();"/>
 		        	
 		       		<h:outputLabel for="inputLastName" 
 		        			value="Last Name" />
 		        	<h:inputText id="inputLastName" 
 		        			value="#{detallePropietarioBean.propietario.lastName}"
-		        			styleClass="form-control"/>
+		        			styleClass="form-control"
+                            required="true"
+                            onchange="modificarFormulario();"/>
 		        	
 		        	<h:outputLabel for="inputAddress" 
 		        			value="Address" />
 		        	<h:inputText id="inputAddress" 
 		        			value="#{detallePropietarioBean.propietario.address}"
-		        			styleClass="form-control"/>
+		        			styleClass="form-control"
+                            required="true"
+                            onchange="modificarFormulario();"/>
 		        	
 		        	<h:outputLabel for="inputCity" 
 		        			value="City" />
 		        	<h:inputText id="inputCity" 
 		        			value="#{detallePropietarioBean.propietario.city}"
-		        			styleClass="form-control"/>
+		        			styleClass="form-control"
+                            required="true"
+                            onchange="modificarFormulario();"/>
 		        	
 		        	<h:outputLabel for="inputTelephone" 
 		        			value="Telephone" />
 		        	<h:inputText id="inputTelephone" 
 		        			value="#{detallePropietarioBean.propietario.telephone}"
-		        			styleClass="form-control"/>
+		        			styleClass="form-control"
+                            label="Telephone"
+                            required="true"
+                            onchange="modificarFormulario();">
+                        <f:validator validatorId="telephoneValidator"/>
+                    </h:inputText>
 		        			
 					<h:panelGroup/>
 					<h:commandButton value="Update Owner" styleClass="btn btn-default" 
@@ -80,10 +108,12 @@
 		       </h:panelGroup>
 		       
 		       <h:commandLink action="#{detalleMascotaBean.nuevo(detallePropietarioBean.propietario.id)}" styleClass="btn btn-default" 
-		       	 value="New Pet" rendered="#{not detallePropietarioBean.modoConsulta}"/>
+		       	 value="New Pet" rendered="#{not detallePropietarioBean.modoConsulta}"
+                 onclick="if (isFormularioModificado()) {return confirm('¿Está seguro que desea salir si guardar los cambios?');}"/>
 		       
 		       <h:commandButton value="Back" styleClass="btn btn-default" immediate="true"
-						action="volver"/>
+					action="volver"
+                    onclick="if (isFormularioModificado()) {return confirm('¿Está seguro que desea salir si guardar los cambios?');}"/>
 				<br/>
 				<br/>
 				<h:dataTable value="${detallePropietarioBean.propietario.pets}" var="pet"
@@ -92,13 +122,26 @@
 						rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all"
 						style="border:solid 1px">
 					<h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Name"/>
+                        </f:facet>
 						<h:outputText value="#{pet.name}"/>
 					</h:column>
 					<h:column>
-						<h:commandLink value="Editar" action="#{detalleMascotaBean.editar(pet.id, detallePropietarioBean.modoConsulta)}"/>
+                        <f:facet name="header">
+                            <h:outputText value="Edit"/>
+                        </f:facet>
+						<h:commandLink value="Edit" immediate="true"
+                                action="#{detalleMascotaBean.editar(pet.id, detallePropietarioBean.modoConsulta)}"
+                                onclick="if (isFormularioModificado()) {return confirm('¿Está seguro que desea salir si guardar los cambios?');}"/>
 					</h:column>
 					<h:column>
-						<h:commandLink value="Consultar" action="#{detalleMascotaBean.consultar(pet.id, detallePropietarioBean.modoConsulta)}"/>
+                        <f:facet name="header">
+                            <h:outputText value="Show"/>
+                        </f:facet>
+						<h:commandLink value="Show" immediate="true"
+                                action="#{detalleMascotaBean.consultar(pet.id, detallePropietarioBean.modoConsulta)}"
+                                onclick="if (isFormularioModificado()) {return confirm('¿Está seguro que desea salir si guardar los cambios?');}"/>
 					</h:column>
 				</h:dataTable>
 		</h:form>

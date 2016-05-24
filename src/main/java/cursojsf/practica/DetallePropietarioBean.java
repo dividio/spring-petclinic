@@ -17,22 +17,24 @@ import org.springframework.samples.petclinic.service.ClinicService;
 @ManagedBean(name = "detallePropietarioBean")
 @RequestScoped
 public class DetallePropietarioBean implements Serializable {
-	
-    /**
+
+	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 7369408853829327176L;
 
 	@ManagedProperty(value = "#{clinicServiceImpl}")
-    private ClinicService clinicService;
-    
-    private Owner propietario;
-    
-    private List<Pet> listaMascotas;
-    
-    private Boolean modoConsulta = Boolean.FALSE;
-    
-    public ClinicService getClinicService() {
+	private ClinicService clinicService;
+
+	private Owner propietario;
+
+	private List<Pet> listaMascotas;
+
+	private Boolean modoConsulta = Boolean.FALSE;
+
+	private Boolean formularioModificado = Boolean.FALSE;
+
+	public ClinicService getClinicService() {
 		return clinicService;
 	}
 
@@ -64,13 +66,22 @@ public class DetallePropietarioBean implements Serializable {
 		this.modoConsulta = modoConsulta;
 	}
 
+	public Boolean getFormularioModificado() {
+		return formularioModificado;
+	}
+
+	public void setFormularioModificado(Boolean formularioModificado) {
+		this.formularioModificado = formularioModificado;
+	}
+
 	public DetallePropietarioBean() {
 		this.propietario = new Owner();
 	}
-	
+
 	@PostConstruct
 	public void postConstruct() {
-		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
+		        .getRequest();
 		String idPropietario = request.getParameter("mainForm:propietario");
 		if (idPropietario == null) {
 			this.propietario = new Owner();
@@ -78,12 +89,12 @@ public class DetallePropietarioBean implements Serializable {
 			this.propietario = clinicService.findOwnerById(Integer.valueOf(idPropietario));
 		}
 	}
-	
+
 	public String nuevo() {
 		this.modoConsulta = Boolean.FALSE;
 		return "nuevo";
 	}
-	
+
 	public String editar(Integer idOwner) {
 		if (idOwner != null) {
 			this.propietario = clinicService.findOwnerById(idOwner);
@@ -91,7 +102,7 @@ public class DetallePropietarioBean implements Serializable {
 		this.modoConsulta = Boolean.FALSE;
 		return "editar";
 	}
-	
+
 	public String consultar(Integer idOwner) {
 		if (idOwner != null) {
 			this.propietario = clinicService.findOwnerById(idOwner);
@@ -99,12 +110,12 @@ public class DetallePropietarioBean implements Serializable {
 		this.modoConsulta = Boolean.TRUE;
 		return "consultar";
 	}
-	
+
 	public String guardar() {
-		
+
 		// Guardamos el propietario
 		clinicService.saveOwner(propietario);
-		
+
 		return null;
 	}
 }
