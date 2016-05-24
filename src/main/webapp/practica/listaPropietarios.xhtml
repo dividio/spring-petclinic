@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title><ui:insert name="title">PetClinic</ui:insert></title>
+	<h:outputStylesheet library="css" name="petclinic.css" />
+</h:head>
+
+<h:body>
+
+	<div class="container-fluid">
+		<div class="container xd-container">
+			<h2>Owners</h2>
+
+			<h:form styleClass="mainForm">
+
+				<!-- Panel de mensajes -->
+				<h:panelGroup id="messagePanel" layout="block">
+					<h:messages errorStyle="color: red" infoStyle="color: green"
+						layout="table" />
+				</h:panelGroup>
+				
+				<!-- Cadena de texto cuando no hay elementos -->
+				<h:outputText escape="false" value="Lista de propietarios vacia" rendered="#{propietariosBean.propietarios.size() == 0}" />
+				
+				<!-- Tabla con el resultado -->
+				<h:panelGroup rendered="#{ownerBean.items.rowCount > 0}">
+				
+					<h:panelGroup layout="block" styleClass="dataTables_filter" style="float:right;">
+						<h:panelGrid columns="2">
+							<h:outputLabel value="Búsqueda" for="filtroBusqueda"/>
+							<h:inputText value="#{propietariosBean.filtro}" id="filtroBusqueda"/>
+						</h:panelGrid>
+					</h:panelGroup>
+				
+                    <h:dataTable value="#{propietariosBean.propietarios}" var="item"
+						border="0" cellpadding="2" cellspacing="0"
+						styleClass="table table-striped"
+						rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all"
+						style="border:solid 1px">
+						<h:column>
+							<h:outputText value="#{item.firstName} #{item.lastName}" />
+						</h:column>
+						<h:column>
+							<h:outputText value="#{item.address}" />
+						</h:column>
+						<h:column>
+							<h:outputText value="#{item.city}" />
+						</h:column>
+						<h:column>
+							<h:outputText value="#{item.telephone}" />
+						</h:column>
+						<h:column>
+							<h:outputText value="#{item.pets.get(0).name}" />
+						</h:column>
+					</h:dataTable>
+				</h:panelGroup>
+				<br />
+				<h:commandLink action="#{detallePropietarioBean.nuevo}"
+					value="New Owner" />
+			</h:form>
+		</div>
+	</div>
+</h:body>
+
+</html>
