@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+      
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title><ui:insert name="title">PetClinic</ui:insert></title>
+    <h:outputStylesheet library="css" name="petclinic.css"/>
+</h:head>
+
+<h:body>
+
+	<div class="container-fluid">
+	    <div class="container xd-container">
+	        <h2>Owner</h2>
+	        
+			<h:form styleClass="mainForm">
+				<h:inputHidden value="#{detallePropietarioBean.propietario.id}"/>
+				<h:inputHidden value="#{detallePropietarioBean.modoConsulta}"/>
+				
+				<h:panelGroup rendered="#{detallePropietarioBean.modoConsulta}">
+					<table class="table table-striped">
+			            <tr>
+			                <th>Name</th>
+			                <td><b><h:outputText value="#{detallePropietarioBean.propietario.firstName} #{detallePropietarioBean.propietario.lastName}"/></b></td>
+			            </tr>
+			            <tr>
+			                <th>Address</th>
+			                <td><h:outputText value="#{detallePropietarioBean.propietario.address}"/></td>
+			            </tr>
+			            <tr>
+			                <th>City</th>
+			                <td><h:outputText value="#{detallePropietarioBean.propietario.city}"/></td>
+			            </tr>
+			            <tr>
+			                <th>Telephone</th>
+			                <td><h:outputText value="#{detallePropietarioBean.propietario.telephone}"/></td>
+			            </tr>
+			        </table>
+		        </h:panelGroup>
+		        <h:panelGroup rendered="#{not detallePropietarioBean.modoConsulta}">
+			        <h:panelGrid columns="2" 
+			        		columnClasses="col-sm-2 control-label,col-sm-10" 
+			        		styleClass="col-sm-12" 
+			        		style="border-collapse: separate;border-spacing:  5px;">
+			        		
+			        	<h:outputLabel for="inputFirstName" 
+			        			value="First Name"/>
+			        	<h:inputText id="inputFirstName" 
+			        			value="#{detallePropietarioBean.propietario.firstName}"
+			        			styleClass="form-control"/>
+			        	
+		        		<h:outputLabel for="inputLastName" 
+			        			value="Last Name" />
+			        	<h:inputText id="inputLastName" 
+			        			value="#{detallePropietarioBean.propietario.lastName}"
+			        			styleClass="form-control"/>
+			        	
+			        	<h:outputLabel for="inputAddress" 
+			        			value="Address" />
+			        	<h:inputText id="inputAddress" 
+			        			value="#{detallePropietarioBean.propietario.address}"
+			        			styleClass="form-control"/>
+			        	
+			        	<h:outputLabel for="inputCity" 
+			        			value="City" />
+			        	<h:inputText id="inputCity" 
+			        			value="#{detallePropietarioBean.propietario.city}"
+			        			styleClass="form-control"/>
+			        	
+			        	<h:outputLabel for="inputTelephone" 
+			        			value="Telephone" />
+			        	<h:inputText id="inputTelephone" 
+			        			value="#{detallePropietarioBean.propietario.telephone}"
+			        			styleClass="form-control"/>
+			        			
+						<h:panelGroup/>
+						<h:commandButton value="Update Owner" styleClass="btn btn-default" 
+								action="#{detallePropietarioBean.guardar}"/>
+			        </h:panelGrid>
+		        </h:panelGroup>
+		        
+		        <h:commandLink action="#{detalleMascotaBean.nuevo(detallePropietarioBean.propietario.id)}" styleClass="btn btn-default" 
+		        	 value="New Pet" rendered="#{not detallePropietarioBean.modoConsulta}"/>
+		        
+		        <h:commandButton value="Back" styleClass="btn btn-default" immediate="true"
+							action="volver"/>
+			</h:form>
+		</div>
+	</div>  
+</h:body>
+</html>
