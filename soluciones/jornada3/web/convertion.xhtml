@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<body>
+
+	<h:form id="idForm">
+		
+		<fieldset>
+			<legend>Conversiones Por Defecto</legend>
+			
+			<!-- Ejemplo de conversion de numero -->
+			<h:outputLabel value="Entrada 1 - Valor númerico entero" for="inputText1"/>
+			<h:inputText value="#{convertBean.entradas['INPUT1']}" required="false" id="inputText1">
+				<f:convertNumber integerOnly="true"/>
+			</h:inputText>
+			<h:message for="inputText1"/>
+			<br/>
+			
+			<!-- Ejemplo de conversion de fecha -->
+			<h:outputLabel value="Entrada 2 - Campo de fecha" for="inputText2"/>
+			<h:inputText value="#{convertBean.entradas['INPUT2']}" required="false" id="inputText2">
+				<f:convertDateTime pattern="dd/MM/yyyy"/>
+			</h:inputText>
+			<h:message for="inputText2"/>
+			<br/>
+			
+		</fieldset>
+		
+		<fieldset>
+			<legend>Conversiones Propias</legend>
+			
+			<!-- Ejemplo de conversion NIF -->
+			<h:outputLabel value="Entrada 3 -  Completador NIF" for="inputText3"/>
+			<h:inputText value="#{convertBean.entradas['INPUT3']}" required="false" id="inputText3">
+				<f:converter converterId="nifConverter"/>
+			</h:inputText>
+			<h:message for="inputText3"/>
+			<br/>
+			
+		</fieldset>
+		
+		<!-- BOtones de acción -->
+		<h:commandButton immediate="true" action="#{convertBean.accion}" value="Acción IMMEDIATE"/>
+		<h:commandButton immediate="false" action="#{convertBean.accion}" value="Acción NO IMMEDIATE"/>
+		
+		
+	</h:form>
+</body>
+</html>

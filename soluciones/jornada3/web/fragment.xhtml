@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<body>
+
+	<h:outputText value="Titulo: #{titulo}"/>
+	<br/>
+	
+	<h:outputText value="Descripcion: #{descripcion}"/>
+	<br/>
+	
+	<h:inputText value="#{mbean.entradas['INPUT'.concat(sufix)]}"/>
+	<br/>
+	
+	<h:selectManyCheckbox value="#{mbean.entradas['CHECBOXES'.concat(sufix)]}">
+		<f:selectItem itemValue="A" itemLabel="Letra A"/>
+		<f:selectItem itemValue="B" itemLabel="Letra B"/>
+		<ui:insert name="items"/>
+	</h:selectManyCheckbox>
+	<br/>
+	
+	<h:commandButton action="#{mbean[miaccion]}" value="Acción"/>	
+
+
+</body>
+</html>

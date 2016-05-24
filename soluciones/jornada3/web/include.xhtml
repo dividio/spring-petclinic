@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<body>
+
+	<h:form id="idForm">
+		
+		<fieldset>
+			<legend>Include</legend>
+			
+			<!-- Ejemplo de include -->
+			<ui:include src="/jornada3/fragment.xhtml">
+				<ui:param name="titulo" value="Titulo Include"/>
+				<ui:param name="descripcion" value="Descripcion Include"/>
+				<ui:param name="mbean" value="#{includeBean}"/>
+				<ui:param name="miaccion" value="accion"/>
+				<ui:param name="sufix" value="_INCLUDE"/>
+			</ui:include>
+			
+		</fieldset>
+		
+		<fieldset>
+			<legend>Decorate</legend>
+			
+			<!-- Ejemplo de include -->
+			<ui:decorate template="/jornada3/fragment.xhtml">
+				<ui:param name="titulo" value="Titulo Decorate"/>
+				<ui:param name="descripcion" value="Descripcion Decorate"/>
+				<ui:param name="mbean" value="#{decorateBean}"/>
+				<ui:param name="miaccion" value="accion"/>
+				<ui:param name="sufix" value="_DECORATE"/>
+				
+				<ui:define name="items">
+					<f:selectItem itemValue="C" itemLabel="Letra C"/>
+					<f:selectItem itemValue="D" itemLabel="Letra D"/>
+				</ui:define>
+			</ui:decorate>
+			
+		</fieldset>
+		
+	</h:form>
+</body>
+</html>
