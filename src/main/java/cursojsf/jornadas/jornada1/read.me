@@ -9,9 +9,10 @@ Ejercicio 1: Componentes de Salida
 	* h:outputText para mostrar una cadena de texto
 	* h:outputLabel para mostrar un label
 	* h:outputLink para mostrar un enlace que al clicarlo llame a la funcion javascript 'funcion'
-	* h:graphicImage para mostrar una imagen a partir de una URL (por ejemplo Google Images)
+	* h:graphicImage para mostrar una imagen a partir de una URL 
+		(por ejemplo:  http://ichef.bbci.co.uk/news/ws/660/amz/worldservice/live/assets/images/2015/09/01/150901210647_google_624x351_pa.jpg)
 	* h:outputFormat para formatear una cadena de texto con dos parámetros
-	* h:outputScript para definir una función javascript denominada 'funcion'
+	* h:outputScript para definir una función javascript denominada 'funcion' que muestre un alert con la cadena 'funcion'
 
 ==================================================================================================
 
@@ -45,7 +46,7 @@ Ejercicio 3: Componentes de Entrada
 	* h:selectOneListbox con los valores {Enero, Febrero, Marzo, Abril, Mayo}
 1.f- Además para cada campo de los del punto anterior asignarle un outputLabel para cada uno de ellos
 1.g- Añadir además los siguientes componentes:
-	* h:message asociado al inputText obligatorio del punt 1.e
+	* h:message asociado al inputText obligatorio del punto 1.e
 	* h:messages
 1-h- Añadir un botón h:commandLink en la parte inferior que ejecute la acción #{componentesBean.accion}
 1.i- Comprobar el resultado de la ejecución del botón cuando no se informa el campo obligatorio
@@ -78,7 +79,7 @@ Ejercicio 6: Mostrar el comportamiento del ciclo de vida
 1.b- Descomentar en el faces-config.xml la siguiente linea:
 		<phase-listener>cursojsf.jornadas.jornada1.MyPhaseListener</phase-listener> 
 	Para activar el listener del ciclo de vida. Mostrar el comportamiento de este
-1.c- Mostrar el comportamiento del immediate en un formulario. Diferencias entre campos y botones con immediate.
+1.c- Mostrar el comportamiento del immediate en un formulario por ejemplo el del ejercicio 3. Ver las diferencias entre campos y botones con immediate.
 
 ==================================================================================================
 
