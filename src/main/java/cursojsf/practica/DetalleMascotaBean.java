@@ -89,6 +89,7 @@ public class DetalleMascotaBean {
 	private ClinicService clinicService;
 
 	public DetalleMascotaBean() {
+		this.mascota = new Pet();
 	}
 	
 	public  List<PetType> getPetTypes() {
@@ -127,6 +128,10 @@ public class DetalleMascotaBean {
 	}
 
 	public String guardar() {
+		
+		// Se busca el propietario
+		Owner owner = clinicService.findOwnerById(idPropietario);
+		owner.addPet(mascota);
 		
 		// Guardamos el propietario
 		clinicService.savePet(this.mascota);

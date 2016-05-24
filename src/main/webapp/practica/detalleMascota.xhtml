@@ -52,7 +52,7 @@
 					<!-- Fila 3: Fecha de nacimiento -->
 					<h:outputText value="BirthDate" styleClass="control-label"/>
 					<h:panelGroup>
-						<h:inputText value="#{detalleMascotaBean.mascota.birthDate}" id="birthDate" styleClass="form-control" required="true"
+						<h:inputText value="#{detalleMascotaBean.mascota.fecha}" id="birthDate" styleClass="form-control" required="true"
 							onchange="modificarFormulario();">
 							<f:convertDateTime pattern="dd/MM/yyyy"/>
 						</h:inputText>
@@ -72,7 +72,7 @@
 					
 					<!-- Fila 5: Botón de Guardar -->
 					<h:outputText></h:outputText>
-					<h:commandButton value="Update Pet" styleClass="btn btn-default"/>
+					<h:commandButton value="Update Pet" styleClass="btn btn-default" action="#{detalleMascotaBean.guardar}"/>
 				
 				</h:panelGrid>
 				

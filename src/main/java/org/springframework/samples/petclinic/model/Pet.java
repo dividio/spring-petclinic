@@ -17,6 +17,7 @@ package org.springframework.samples.petclinic.model;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -29,9 +30,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.Type;
-import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import org.springframework.beans.support.MutableSortDefinition;
 import org.springframework.beans.support.PropertyComparator;
@@ -63,6 +64,9 @@ public class Pet extends NamedEntity {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "pet", fetch = FetchType.EAGER)
     private Set<Visit> visits;
+    
+    @Transient
+    private Date fecha;
 
     public LocalDate getBirthDate() {
         return this.birthDate;
@@ -83,8 +87,26 @@ public class Pet extends NamedEntity {
     public Owner getOwner() {
         return this.owner;
     }
+    
+    public Date getFecha() {
+    	if (this.birthDate ==null) {
+    		this.fecha = null;
+    	} else {
+    		this.fecha = this.birthDate.toDate();
+    	}
+		return fecha;
+	}
 
-    protected void setOwner(Owner owner) {
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
+		if (fecha == null) {
+			this.birthDate = null;
+		} else {
+			this.birthDate = LocalDate.fromDateFields(fecha);
+		}
+	}
+
+	protected void setOwner(Owner owner) {
         this.owner = owner;
     }
 
