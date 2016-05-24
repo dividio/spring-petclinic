@@ -5,14 +5,14 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.view.ViewScoped;
+import javax.faces.bean.RequestScoped;
 
 import org.springframework.samples.petclinic.model.Owner;
 import org.springframework.samples.petclinic.model.Pet;
 import org.springframework.samples.petclinic.service.ClinicService;
 
 @ManagedBean(name = "detallePropietarioBean")
-@ViewScoped
+@RequestScoped
 public class DetallePropietarioBean implements Serializable {
 	
     /**
@@ -62,21 +62,27 @@ public class DetallePropietarioBean implements Serializable {
 	}
 
 	public DetallePropietarioBean() {
-		System.out.println("Constructor");
+		this.propietario = new Owner();
 	}
 	
 	public String nuevo() {
-		this.propietario = new Owner();
+		this.modoConsulta = Boolean.FALSE;
 		return "nuevo";
 	}
 	
-	public String editar() {
-		this.propietario = getOwnerDummy(1);
+	public String editar(Integer idOwner) {
+		if (idOwner != null) {
+			this.propietario = clinicService.findOwnerById(idOwner);
+		}
+		this.modoConsulta = Boolean.FALSE;
 		return "editar";
 	}
 	
-	public String consultar() {
-		this.propietario = getOwnerDummy(1);
+	public String consultar(Integer idOwner) {
+		if (idOwner != null) {
+			this.propietario = clinicService.findOwnerById(idOwner);
+		}
+		this.modoConsulta = Boolean.TRUE;
 		return "consultar";
 	}
 	
@@ -86,18 +92,5 @@ public class DetallePropietarioBean implements Serializable {
 		clinicService.saveOwner(propietario);
 		
 		return null;
-	}
-	
-	private Owner getOwnerDummy(int index) {
-		Owner resultado = new Owner();
-
-		resultado.setAddress("Dirección " + index);
-		resultado.setCity("Ciudad " + index);
-		resultado.setFirstName("Nombre " + index);
-		resultado.setId(index);
-		resultado.setLastName("Apellido " + index);
-		resultado.setTelephone("+" + index + " 999999999");
-		
-		return resultado;
 	}
 }
