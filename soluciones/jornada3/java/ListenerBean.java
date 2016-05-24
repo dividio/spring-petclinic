@@ -1,5 +1,6 @@
 package cursojsf.jornadas.jornada3;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
@@ -10,7 +11,13 @@ import javax.faces.event.ValueChangeEvent;
 
 @ManagedBean(name = "listenerBean")
 @SessionScoped
-public class ListenerBean {
+public class ListenerBean implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private HashMap<String, Object> entradas = new HashMap<String, Object>();
 	
 	private String valor;
