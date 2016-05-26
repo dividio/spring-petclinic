@@ -6,7 +6,9 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.component.UIInput;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.samples.petclinic.model.Owner;
 import org.springframework.samples.petclinic.model.Pet;
@@ -22,7 +24,7 @@ public class DetalleMascotaBean {
 
 	private Boolean modoConsulta;
 	
-	private Boolean modoConsultaPropietario;
+	private Boolean modoConsultaPropietario = Boolean.FALSE;
 	
 	private Integer idPropietario;
 	
@@ -139,10 +141,36 @@ public class DetalleMascotaBean {
 		return null;
 	}
 	
+	public String volverEditar() {
+		FacesContext context = FacesContext.getCurrentInstance();
+		DetallePropietarioBean detallePropietarioBean = (DetallePropietarioBean) context.getELContext().getELResolver()
+				.getValue(context.getELContext(), null, "detallePropietarioBean");
+		HttpServletRequest request = (HttpServletRequest) context.getExternalContext()
+		        .getRequest();
+		this.idPropietario = Integer.valueOf(request.getParameter("idPropietario"));
+		return detallePropietarioBean.editar(this.idPropietario);
+	}
+	
+	public String volverConsultar() {
+		FacesContext context = FacesContext.getCurrentInstance();
+		DetallePropietarioBean detallePropietarioBean = (DetallePropietarioBean) context.getELContext().getELResolver()
+				.getValue(context.getELContext(), null, "detallePropietarioBean");
+		return detallePropietarioBean.consultar(this.idPropietario);
+	}
+	
 	public void valueChangeListener(ValueChangeEvent event) {
 		
 		// Actualizamos el modelo de forma manual
 		idPropietario = Integer.valueOf(event.getNewValue().toString());
+	     
+	    // Previene que el setter sea llamado en futuras phases
+	    ((UIInput) event.getComponent()).setLocalValueSet(false);
+	}
+	
+	public void valueChangeListenerModoConsulta(ValueChangeEvent event) {
+		
+		// Actualizamos el modelo de forma manual
+		modoConsultaPropietario = Boolean.valueOf(event.getNewValue().toString());
 	     
 	    // Previene que el setter sea llamado en futuras phases
 	    ((UIInput) event.getComponent()).setLocalValueSet(false);

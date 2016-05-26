@@ -17,7 +17,8 @@
 				<h:inputHidden value="#{detalleMascotaBean.idPropietario}" 
 					immediate="true" valueChangeListener="#{detalleMascotaBean.valueChangeListener}"/>
 				<h:inputHidden value="#{detalleMascotaBean.modoConsulta}"/>
-				<h:inputHidden value="#{detalleMascotaBean.modoConsultaPropietario}"/>
+				<h:inputHidden value="#{detalleMascotaBean.modoConsultaPropietario}"
+					immediate="true" valueChangeListener="#{detalleMascotaBean.valueChangeListenerModoConsulta}"/>
 				
 				<h:inputHidden id="formularioModificado" value="#{detalleMascotaBean.formularioModificado}"/>
 				
@@ -101,12 +102,16 @@
 				
 				<h:commandButton value="Back" styleClass="btn btn-default" immediate="true" 
 							rendered="#{!detalleMascotaBean.modoConsultaPropietario}"
-							action="#{detallePropietarioBean.editar(detalleMascotaBean.idPropietario)}"
-							onclick="if (isFormularioModificado()) {return confirm('¿Está seguro que desea volver si guardar los cambios?');}"/>
+							action="#{detalleMascotaBean.volverEditar}"
+							onclick="if (isFormularioModificado()) {return confirm('¿Está seguro que desea volver si guardar los cambios?');}">
+						<f:param name="idPropietario" value="#{detalleMascotaBean.idPropietario}"></f:param>
+				</h:commandButton>
 							
 				<h:commandButton value="Back" styleClass="btn btn-default" immediate="true" 
 							rendered="#{detalleMascotaBean.modoConsultaPropietario}"
-							action="#{detallePropietarioBean.consultar(detalleMascotaBean.idPropietario)}"/>
+							action="#{detalleMascotaBean.volverConsultar}">
+							<f:param name="idPropietario" value="#{detalleMascotaBean.idPropietario}"></f:param>
+				</h:commandButton>
 				
 			</h:form>
 			
