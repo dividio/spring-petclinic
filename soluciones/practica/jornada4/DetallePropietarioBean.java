@@ -83,7 +83,7 @@ public class DetallePropietarioBean implements Serializable {
 		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
 		        .getRequest();
 		String idPropietario = request.getParameter("mainForm:propietario");
-		if (idPropietario == null) {
+		if (idPropietario == null || idPropietario.isEmpty()) {
 			this.propietario = new Owner();
 		} else {
 			this.propietario = clinicService.findOwnerById(Integer.valueOf(idPropietario));
@@ -113,8 +113,17 @@ public class DetallePropietarioBean implements Serializable {
 
 	public String guardar() {
 
+		// Por defecto tomcat manda un 0 en un entero null
+		// se pude habilitar la opción
+		// -Dorg.apache.el.parser.COERCE_TO_ZERO=false
+		// para evitar esto
+		if (propietario.getId() != null && propietario.getId() == 0) {
+			propietario.setId(null);
+		}
+
 		// Guardamos el propietario
 		clinicService.saveOwner(propietario);
+		this.formularioModificado = Boolean.FALSE;
 
 		return null;
 	}

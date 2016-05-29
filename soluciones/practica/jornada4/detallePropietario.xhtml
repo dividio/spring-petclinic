@@ -12,9 +12,7 @@
 	<ui:define name="cuerpo">
         
 		<h:form styleClass="mainForm" id="mainForm">
-			<h:inputHidden value="#{detallePropietarioBean.propietario}" id="propietario">
-				<f:converter converterId="ownerConverter"/>
-		    </h:inputHidden>
+			<h:inputHidden value="#{detallePropietarioBean.propietario.id}" id="propietario"/>
 			<h:inputHidden value="#{detallePropietarioBean.modoConsulta}"/>
       
             <h:inputHidden id="formularioModificado" value="#{detallePropietarioBean.formularioModificado}"/>
