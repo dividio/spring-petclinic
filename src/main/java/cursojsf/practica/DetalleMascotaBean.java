@@ -23,13 +23,13 @@ public class DetalleMascotaBean {
 	private List<PetType> tiposMascota;
 
 	private Boolean modoConsulta;
-	
+
 	private Boolean modoConsultaPropietario = Boolean.FALSE;
-	
+
 	private Integer idPropietario;
-	
+
 	private Boolean formularioModificado = Boolean.FALSE;
-	
+
 	public Pet getMascota() {
 		return mascota;
 	}
@@ -61,7 +61,7 @@ public class DetalleMascotaBean {
 	public void setClinicService(ClinicService clinicService) {
 		this.clinicService = clinicService;
 	}
-	
+
 	public Boolean getModoConsultaPropietario() {
 		return modoConsultaPropietario;
 	}
@@ -86,15 +86,14 @@ public class DetalleMascotaBean {
 		this.formularioModificado = formularioModificado;
 	}
 
-
 	@ManagedProperty(value = "#{clinicServiceImpl}")
 	private ClinicService clinicService;
 
 	public DetalleMascotaBean() {
 		this.mascota = new Pet();
 	}
-	
-	public  List<PetType> getPetTypes() {
+
+	public List<PetType> getPetTypes() {
 		tiposMascota = new ArrayList<>(clinicService.findPetTypes());
 		return tiposMascota;
 	}
@@ -108,20 +107,20 @@ public class DetalleMascotaBean {
 		this.idPropietario = idPropietario;
 		return "nuevo";
 	}
-	
+
 	public String editar(Integer idMascota, Boolean modoConsultaPropietario) {
 		if (idMascota != null) {
-			this.mascota= clinicService.findPetById(idMascota);
+			this.mascota = clinicService.findPetById(idMascota);
 		}
 		this.modoConsultaPropietario = modoConsultaPropietario;
 		this.modoConsulta = Boolean.FALSE;
 		this.idPropietario = this.mascota.getOwner().getId();
 		return "editar";
 	}
-	
+
 	public String consultar(Integer idMascota, Boolean modoConsultaPropietario) {
 		if (idMascota != null) {
-			this.mascota= clinicService.findPetById(idMascota);
+			this.mascota = clinicService.findPetById(idMascota);
 		}
 		this.modoConsultaPropietario = modoConsultaPropietario;
 		this.modoConsulta = Boolean.TRUE;
@@ -130,50 +129,58 @@ public class DetalleMascotaBean {
 	}
 
 	public String guardar() {
-		
+
+		// Por defecto tomcat manda un 0 en un entero null
+		// se pude habilitar la opción
+		// -Dorg.apache.el.parser.COERCE_TO_ZERO=false
+		// para evitar esto
+		if (mascota.getId() != null && mascota.getId() == 0) {
+			mascota.setId(null);
+		}
+
 		// Se busca el propietario
 		Owner owner = clinicService.findOwnerById(idPropietario);
 		owner.addPet(mascota);
-		
+
 		// Guardamos el propietario
 		clinicService.savePet(this.mascota);
-		
+		this.formularioModificado = Boolean.FALSE;
+
 		return null;
 	}
-	
+
 	public String volverEditar() {
 		FacesContext context = FacesContext.getCurrentInstance();
 		DetallePropietarioBean detallePropietarioBean = (DetallePropietarioBean) context.getELContext().getELResolver()
-				.getValue(context.getELContext(), null, "detallePropietarioBean");
-		HttpServletRequest request = (HttpServletRequest) context.getExternalContext()
-		        .getRequest();
+		        .getValue(context.getELContext(), null, "detallePropietarioBean");
+		HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
 		this.idPropietario = Integer.valueOf(request.getParameter("idPropietario"));
 		return detallePropietarioBean.editar(this.idPropietario);
 	}
-	
+
 	public String volverConsultar() {
 		FacesContext context = FacesContext.getCurrentInstance();
 		DetallePropietarioBean detallePropietarioBean = (DetallePropietarioBean) context.getELContext().getELResolver()
-				.getValue(context.getELContext(), null, "detallePropietarioBean");
+		        .getValue(context.getELContext(), null, "detallePropietarioBean");
 		return detallePropietarioBean.consultar(this.idPropietario);
 	}
-	
+
 	public void valueChangeListener(ValueChangeEvent event) {
-		
+
 		// Actualizamos el modelo de forma manual
 		idPropietario = Integer.valueOf(event.getNewValue().toString());
-	     
-	    // Previene que el setter sea llamado en futuras phases
-	    ((UIInput) event.getComponent()).setLocalValueSet(false);
+
+		// Previene que el setter sea llamado en futuras phases
+		((UIInput) event.getComponent()).setLocalValueSet(false);
 	}
-	
+
 	public void valueChangeListenerModoConsulta(ValueChangeEvent event) {
-		
+
 		// Actualizamos el modelo de forma manual
 		modoConsultaPropietario = Boolean.valueOf(event.getNewValue().toString());
-	     
-	    // Previene que el setter sea llamado en futuras phases
-	    ((UIInput) event.getComponent()).setLocalValueSet(false);
+
+		// Previene que el setter sea llamado en futuras phases
+		((UIInput) event.getComponent()).setLocalValueSet(false);
 	}
 
 }
