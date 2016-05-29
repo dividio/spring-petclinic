@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition template="plantilla.xhtml">
+    <ui:define name="titulo">
+        <h:outputText value="Owner"/>
+    </ui:define>
+    <ui:define name="cuerpo">
+
+            <h:form styleClass="mainForm" >
+
+                <!-- Panel de mensajes -->
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green"
+                        layout="table" />
+                </h:panelGroup>
+                
+                <!-- Cadena de texto cuando no hay elementos -->
+                <h:outputText escape="false" value="Lista de propietarios vacia" rendered="#{propietariosBean.propietarios.size() == 0}" />
+                
+                <!-- Tabla con el resultado -->
+                <h:panelGroup rendered="#{ownerBean.items.rowCount > 0}">
+                
+                    <h:panelGroup layout="block" styleClass="dataTables_filter" style="float:right;">
+                        <h:panelGrid columns="3" styleClass="col-sm-12">
+                            <h:outputLabel value="Búsqueda" for="filtroBusqueda"/>
+                            <h:inputText value="#{propietariosBean.filtro}" id="filtroBusqueda" styleClass="form-control"/>
+                            <h:commandButton value="Search" action="#{propietariosBean.filtrar}" styleClass="btn btn-default"/>
+                        </h:panelGrid>
+                    </h:panelGroup>
+                    <br/>
+                    <br/>
+                
+                    <h:dataTable value="#{propietariosBean.propietarios}" var="item"
+                        border="0" cellpadding="2" cellspacing="0"
+                        styleClass="table table-striped" rendered="#{not empty propietariosBean.propietarios }"
+                        rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all"
+                        style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Name"/>
+                            </f:facet>
+                            <h:outputText value="#{item.firstName} #{item.lastName}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Address"/>
+                            </f:facet>
+                            <h:outputText value="#{item.address}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="City"/>
+                            </f:facet>
+                            <h:outputText value="#{item.city}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Telephone"/>
+                            </f:facet>
+                            <h:outputText value="#{item.telephone}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Pets"/>
+                            </f:facet>
+                            <ui:repeat var="pet" value="#{item.pets}">
+                                <h:outputText value="#{pet.name}"/>
+                                <br/>   
+                            </ui:repeat>
+                            
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Edit"/>
+                            </f:facet>
+                            <h:commandLink value="Edit" action="#{detallePropietarioBean.editar(item.id)}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Show"/>
+                            </f:facet>
+                            <h:commandLink value="Show" action="#{detallePropietarioBean.consultar(item.id)}" />
+                        </h:column>
+                    </h:dataTable>
+                    <h:panelGroup rendered="#{empty propietariosBean.propietarios }">
+                        <br/>
+                        <br/>
+                    </h:panelGroup>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{detallePropietarioBean.nuevo}"
+                    value="New Owner" />
+            </h:form>
+    </ui:define>
+</ui:composition>
+</html>

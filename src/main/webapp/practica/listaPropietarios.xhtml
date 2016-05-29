@@ -11,7 +11,7 @@
 	</ui:define>
 	<ui:define name="cuerpo">
 
-			<h:form styleClass="mainForm" >
+			<h:form id="mainForm" styleClass="mainForm" >
 
 				<!-- Panel de mensajes -->
 				<h:panelGroup id="messagePanel" layout="block">
@@ -23,13 +23,13 @@
 				<h:outputText escape="false" value="Lista de propietarios vacia" rendered="#{propietariosBean.propietarios.size() == 0}" />
 				
 				<!-- Tabla con el resultado -->
-				<h:panelGroup rendered="#{ownerBean.items.rowCount > 0}">
+				<h:panelGroup>
 				
 					<h:panelGroup layout="block" styleClass="dataTables_filter" style="float:right;">
 						<h:panelGrid columns="3" styleClass="col-sm-12">
 							<h:outputLabel value="Búsqueda" for="filtroBusqueda"/>
 							<h:inputText value="#{propietariosBean.filtro}" id="filtroBusqueda" styleClass="form-control">
-								<f:ajax event="keyup" execute="filtroBusqueda" listener="#{propietariosBean.buscarAjax}" render="tablaPropietarios"
+								<f:ajax event="keyup" execute="filtroBusqueda" listener="#{propietariosBean.buscarAjax}" render="mainForm"
 									delay="1000"/>								
 							</h:inputText>
 							<h:commandButton value="Search" action="#{propietariosBean.filtrar}" styleClass="btn btn-default"/>
@@ -40,7 +40,7 @@
 				
                     <h:dataTable value="#{propietariosBean.propietarios}" var="item"
 						border="0" cellpadding="2" cellspacing="0" id="tablaPropietarios"
-						styleClass="table table-striped" rendered="#{not empty propietariosBean.propietarios }"
+						styleClass="table table-striped" rendered="#{not empty propietariosBean.propietarios}"
 						rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all"
 						style="border:solid 1px">
 						<h:column>
